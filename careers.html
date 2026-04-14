@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>採用情報 — 株式会社NORD-X</title>
+  <meta name="description" content="株式会社NORD-Xの採用情報。北海道発AIスタートアップで、データと実装の最前線で働きませんか。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─────────────────────────────────────────────────────
+       Reset & Variables
+    ───────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white:        #FFFFFF;
+      --surface:      #F4F6FB;
+      --border:       #E4E8F2;
+      --navy:         #0D0F1E;
+      --body:         #2C3252;
+      --muted:        #7A849A;
+      --cyan:         #00A8C8;
+      --cyan-light:   #E6F7FB;
+      --orange:       #F55A1E;
+      --orange-light: #FFF0EB;
+      --shadow-card:  0 2px 16px rgba(13,15,30,0.07);
+      --shadow-hover: 0 8px 40px rgba(0,168,200,0.15);
+      --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+      --font-d:       'Syne', sans-serif;
+      --font-b:       'Inter', sans-serif;
+      --max-w:        1200px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--body);
+      font-family: var(--font-b);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+    .section    { padding: 120px 0; }
+    .section--surface { background: var(--surface); }
+
+    /* ─────────────────────────────────────────────────────
+       Typography
+    ───────────────────────────────────────────────────── */
+    .h-xl {
+      font-family: var(--font-d); font-weight: 800;
+      font-size: clamp(40px, 5.5vw, 64px);
+      line-height: 1.08; letter-spacing: -0.03em; color: #fff;
+    }
+    .h-lg {
+      font-family: var(--font-d); font-weight: 700;
+      font-size: clamp(28px, 3.5vw, 42px);
+      line-height: 1.2; letter-spacing: -0.02em; color: var(--navy);
+    }
+    .tag {
+      display: inline-block; padding: 4px 14px;
+      background: rgba(0,168,200,0.2); color: var(--cyan);
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border-radius: 999px; margin-bottom: 20px;
+    }
+    .tag--orange { background: var(--orange-light); color: var(--orange); }
+
+    /* ─────────────────────────────────────────────────────
+       Buttons
+    ───────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 8px; border: 1.5px solid transparent;
+      font-family: var(--font-b); font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s ease; line-height: 1;
+    }
+    .btn .icon { width: 16px; height: 16px; }
+    .btn-primary { background: var(--cyan); color: #fff; border-color: var(--cyan); }
+    .btn-primary:hover { filter: brightness(1.08); box-shadow: 0 4px 20px rgba(0,168,200,0.35); }
+    .btn-outline { background: transparent; color: var(--orange); border-color: var(--orange); }
+    .btn-outline:hover { background: var(--orange); color: #fff; box-shadow: 0 4px 20px rgba(245,90,30,0.28); }
+
+    /* ─────────────────────────────────────────────────────
+       Navigation
+    ───────────────────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav__inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 40px;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav__logo { font-family: var(--font-d); font-size: 20px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
+    .nav__logo em { font-style: normal; color: var(--cyan); }
+    .nav__links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav__links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color 0.15s; }
+    .nav__links a:hover { color: var(--navy); }
+    .nav__cta { padding: 9px 22px; font-size: 14px; }
+
+    /* ─────────────────────────────────────────────────────
+       Hamburger / Mobile Nav
+    ───────────────────────────────────────────────────── */
+    .nav__hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      color: var(--navy); padding: 6px; border-radius: 6px; transition: background 0.15s;
+    }
+    .nav__hamburger:hover { background: var(--surface); }
+    .nav__hamburger .icon { width: 22px; height: 22px; }
+    .nav__mobile {
+      position: absolute; top: 64px; left: 0; right: 0;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px 24px;
+      box-shadow: 0 8px 32px rgba(13,15,30,0.08);
+      display: none;
+    }
+    .nav__mobile.open { display: block; }
+    .nav__mobile__links { list-style: none; margin-bottom: 16px; }
+    .nav__mobile__links li a {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+      font-size: 15px; font-weight: 500; color: var(--navy); transition: color 0.15s;
+    }
+    .nav__mobile__links li:last-child a { border-bottom: none; }
+    .nav__mobile__links li a:hover { color: var(--cyan); }
+    .nav__mobile__cta { width: 100%; justify-content: center; margin-top: 8px; }
+
+    /* ─────────────────────────────────────────────────────
+       Page Hero
+    ───────────────────────────────────────────────────── */
+    .page-hero {
+      background: var(--navy);
+      padding-top: 184px;
+      padding-bottom: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(0,168,200,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .page-hero__tag {
+      background: rgba(0,168,200,0.2); color: var(--cyan);
+      border-radius: 999px; padding: 4px 14px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      display: inline-block; margin-bottom: 20px;
+    }
+    .page-hero__title { color: #fff; margin-bottom: 16px; }
+    .page-hero__sub { font-size: 18px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+
+    /* ─────────────────────────────────────────────────────
+       Careers
+    ───────────────────────────────────────────────────── */
+    .careers__inner { display: grid; grid-template-columns: 5fr 6fr; gap: 80px; align-items: start; }
+    .careers__headline {
+      font-family: var(--font-d); font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: var(--navy); margin-bottom: 20px;
+    }
+    .careers__desc { font-size: 15px; color: var(--muted); line-height: 1.85; margin-bottom: 32px; }
+    .careers__note {
+      margin-top: 28px; padding: 20px 24px;
+      background: var(--orange-light); border-left: 3px solid var(--orange);
+      border-radius: 0 12px 12px 0; font-size: 14px; color: var(--body); line-height: 1.75;
+    }
+    .careers__note strong { color: var(--orange); }
+    .profiles__label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 16px; display: block;
+    }
+    .profiles { display: flex; flex-direction: column; gap: 14px; }
+    .profile-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px 26px; box-shadow: var(--shadow-card); transition: all 0.2s ease;
+    }
+    .profile-card:hover { border-color: var(--orange); transform: translateX(6px); }
+    .profile-card__title { font-family: var(--font-d); font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .profile-card__text  { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+    /* ─────────────────────────────────────────────────────
+       CTA Section
+    ───────────────────────────────────────────────────── */
+    .cta-section { padding: 100px 0; text-align: center; }
+    .cta-section__title { font-family: var(--font-d); font-size: clamp(28px, 3.5vw, 44px); font-weight: 700; color: var(--navy); margin-bottom: 16px; letter-spacing: -0.02em; }
+    .cta-section__sub { font-size: 15px; color: var(--muted); margin-bottom: 40px; }
+    .cta-section__actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ─────────────────────────────────────────────────────
+       Sticky CTA (mobile)
+    ───────────────────────────────────────────────────── */
+    .sticky-cta {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border);
+      padding: 12px 20px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
+      box-shadow: 0 -4px 20px rgba(13,15,30,0.08);
+    }
+    .sticky-cta__inner { display: flex; gap: 10px; }
+    .sticky-cta__inner .btn { flex: 1; justify-content: center; font-size: 14px; padding: 12px; }
+
+    /* ─────────────────────────────────────────────────────
+       Footer
+    ───────────────────────────────────────────────────── */
+    .footer { border-top: 1px solid var(--border); padding: 64px 0 32px; }
+    .footer__top { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; margin-bottom: 48px; }
+    .footer__logo { font-family: var(--font-d); font-size: 20px; font-weight: 700; color: var(--navy); display: block; margin-bottom: 10px; }
+    .footer__logo em { font-style: normal; color: var(--cyan); }
+    .footer__tagline { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .footer__address { font-size: 12px; color: var(--muted); line-height: 1.7; }
+    .footer__nav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .footer__nav-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); margin-bottom: 14px; display: block; }
+    .footer__nav-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer__nav-col ul li a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
+    .footer__nav-col ul li a:hover { color: var(--navy); }
+    .footer__bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+    .footer__copy { font-size: 13px; color: var(--muted); }
+
+    /* ─────────────────────────────────────────────────────
+       Scroll animations
+    ───────────────────────────────────────────────────── */
+    .fade-up {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+    }
+    .fade-up.visible { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.16s; }
+    .d3 { transition-delay: 0.24s; }
+
+    /* ─────────────────────────────────────────────────────
+       Responsive
+    ───────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .section { padding: 80px 0; }
+      .nav__links, .nav__cta { display: none; }
+      .nav__hamburger { display: flex; align-items: center; }
+      .page-hero { padding-top: 120px; padding-bottom: 64px; }
+      .careers__inner { grid-template-columns: 1fr; gap: 48px; }
+      .sticky-cta { display: block; }
+      .footer__top { grid-template-columns: 1fr; gap: 40px; }
+      .footer__nav-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .footer__bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────────── -->
+  <nav class="nav" id="mainNav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">NORD<em>-X</em></a>
+      <ul class="nav__links">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="services.html">サービス</a></li>
+        <li><a href="company.html">会社概要</a></li>
+        <li><a href="news.html">ニュース</a></li>
+        <li><a href="careers.html" style="color: var(--navy); font-weight: 600;">採用情報</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary nav__cta">
+        お問い合わせ <i data-lucide="arrow-right" class="icon"></i>
+      </a>
+      <button class="nav__hamburger" id="navHamburger" aria-label="メニューを開く">
+        <i data-lucide="menu" class="icon"></i>
+      </button>
+    </div>
+    <div class="nav__mobile" id="navMobile">
+      <ul class="nav__mobile__links">
+        <li><a href="index.html">ホーム <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="services.html">サービス <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="company.html">会社概要 <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="news.html">ニュース <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="careers.html">採用情報 <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary nav__mobile__cta">
+        <i data-lucide="send" class="icon"></i> お問い合わせ
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── Page Hero ────────────────────────────────────────────── -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__tag">Careers</div>
+      <h1 class="h-xl page-hero__title">採用情報</h1>
+      <p class="page-hero__sub">北海道発、データと現場の最前線へ。</p>
+    </div>
+  </section>
+
+  <!-- ── Careers Content ──────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="careers__inner">
+        <div class="fade-up">
+          <div class="tag tag--orange">Careers</div>
+          <h2 class="careers__headline">教室の理論を、<br>現場の利益へ。</h2>
+          <p class="careers__desc">
+            北海道大学をはじめ、データサイエンスと地域創生に関心を持つ学生と
+            一緒に働きたいと思っています。創業期のスタートアップだからこそ、
+            プロダクト開発も経営判断も、深く関われます。
+          </p>
+          <a href="contact.html" class="btn btn-outline">エントリーする <i data-lucide="arrow-right" class="icon"></i></a>
+          <div class="careers__note">
+            <strong>圧倒的な裁量環境。</strong><br>
+            AIプロダクトの開発と経営コンサルの両輪に関与できる、地方では得難い実践の場です。
+          </div>
+        </div>
+
+        <div class="fade-up d1">
+          <span class="profiles__label">求める人物像</span>
+          <div class="profiles">
+            <div class="profile-card">
+              <p class="profile-card__title">データで考えられる人</p>
+              <p class="profile-card__text">「なんとなく」より「なぜなら」を大切にする方。仮説と検証で動けると尚よし。</p>
+            </div>
+            <div class="profile-card">
+              <p class="profile-card__title">経営者の視点を持てる人</p>
+              <p class="profile-card__text">クライアントの経営パートナーとして成長したい方。数字の先の意思決定に興味がある方。</p>
+            </div>
+            <div class="profile-card">
+              <p class="profile-card__title">まず手を動かせる人</p>
+              <p class="profile-card__text">スキルの有無より姿勢を重視します。AI・データ分析・営業、どのフィールドでもOK。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Entry CTA ────────────────────────────────────────────── -->
+  <section class="cta-section section--surface">
+    <div class="container">
+      <div class="fade-up">
+        <h2 class="cta-section__title">エントリーはこちら</h2>
+        <p class="cta-section__sub">まずは気軽にメッセージください。インターン・業務委託など、あなたのスタイルに合った形で話しましょう。</p>
+        <div class="cta-section__actions">
+          <a href="contact.html" class="btn btn-primary">
+            <i data-lucide="send" class="icon"></i> お問い合わせ・エントリー
+          </a>
+          <a href="mailto:kori23172@gmail.com" class="btn btn-outline">
+            メールで直接連絡
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">NORD<em>-X</em></a>
+          <p class="footer__tagline">データが、一番正直だ。</p>
+          <p class="footer__address">〒001-0024 北海道札幌市北区<br>北24条西19丁目5-21</p>
+        </div>
+        <div class="footer__nav-grid">
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">サービス</span>
+            <ul>
+              <li><a href="services.html">Dynamic Pricing Lite</a></li>
+              <li><a href="services.html">AI &amp; DX Consulting</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">会社</span>
+            <ul>
+              <li><a href="company.html">会社概要</a></li>
+              <li><a href="news.html">ニュース</a></li>
+              <li><a href="careers.html">採用情報</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">Contact</span>
+            <ul>
+              <li><a href="contact.html">お問い合わせ</a></li>
+              <li><a href="mailto:kori23172@gmail.com">kori23172@gmail.com</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">© 2026 株式会社NORD-X. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── Sticky CTA (mobile) ───────────────────────────────────── -->
+  <div class="sticky-cta" id="stickyCta">
+    <div class="sticky-cta__inner">
+      <a href="contact.html" class="btn btn-primary">
+        <i data-lucide="send" class="icon"></i> まずは相談する
+      </a>
+      <a href="mailto:kori23172@gmail.com" class="btn btn-outline">メール</a>
+    </div>
+  </div>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>
+    lucide.createIcons();
+
+    /* ── Hamburger menu ──────────────────────────────────── */
+    const hamburger = document.getElementById('navHamburger');
+    const mobileNav = document.getElementById('navMobile');
+    let menuOpen = false;
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menuOpen = !menuOpen;
+        mobileNav.classList.toggle('open', menuOpen);
+        const icon = hamburger.querySelector('i[data-lucide]');
+        if (icon) { icon.setAttribute('data-lucide', menuOpen ? 'x' : 'menu'); lucide.createIcons(); }
+      });
+      document.addEventListener('click', (e) => {
+        if (menuOpen && !mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
+          menuOpen = false; mobileNav.classList.remove('open');
+          const icon = hamburger.querySelector('i[data-lucide]');
+          if (icon) { icon.setAttribute('data-lucide', 'menu'); lucide.createIcons(); }
+        }
+      });
+      mobileNav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          menuOpen = false; mobileNav.classList.remove('open');
+          const icon = hamburger.querySelector('i[data-lucide]');
+          if (icon) { icon.setAttribute('data-lucide', 'menu'); lucide.createIcons(); }
+        });
+      });
+    }
+
+    /* ── Scroll fade-up ──────────────────────────────────── */
+    const fadeObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+  </script>
+
+</body>
+</html>

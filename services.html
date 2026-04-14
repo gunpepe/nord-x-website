@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>サービス — 株式会社NORD-X</title>
+  <meta name="description" content="NORD-Xのサービス。宿泊業向けダイナミックプライシングツール「DPLite」と中小企業向けAI・DXコンサルティング。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─────────────────────────────────────────────────────
+       Reset & Variables
+    ───────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white:        #FFFFFF;
+      --surface:      #F4F6FB;
+      --border:       #E4E8F2;
+      --navy:         #0D0F1E;
+      --body:         #2C3252;
+      --muted:        #7A849A;
+      --cyan:         #00A8C8;
+      --cyan-light:   #E6F7FB;
+      --orange:       #F55A1E;
+      --orange-light: #FFF0EB;
+      --shadow-card:  0 2px 16px rgba(13,15,30,0.07);
+      --shadow-hover: 0 8px 40px rgba(0,168,200,0.15);
+      --shadow-mock:  0 16px 48px rgba(13,15,30,0.12);
+      --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+      --font-d:       'Syne', sans-serif;
+      --font-b:       'Inter', sans-serif;
+      --max-w:        1200px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--body);
+      font-family: var(--font-b);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+    .section    { padding: 120px 0; }
+    .section--surface { background: var(--surface); }
+
+    /* ─────────────────────────────────────────────────────
+       Typography
+    ───────────────────────────────────────────────────── */
+    .h-xl {
+      font-family: var(--font-d); font-weight: 800;
+      font-size: clamp(40px, 5.5vw, 64px);
+      line-height: 1.08; letter-spacing: -0.03em; color: #fff;
+    }
+    .h-lg {
+      font-family: var(--font-d); font-weight: 700;
+      font-size: clamp(28px, 3.5vw, 42px);
+      line-height: 1.2; letter-spacing: -0.02em; color: var(--navy);
+    }
+    .tag {
+      display: inline-block; padding: 4px 14px;
+      background: rgba(0,168,200,0.2); color: var(--cyan);
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border-radius: 999px; margin-bottom: 20px;
+    }
+    .tag--surface { background: var(--cyan-light); color: var(--cyan); }
+    .tag--orange { background: var(--orange-light); color: var(--orange); }
+
+    /* ─────────────────────────────────────────────────────
+       Buttons
+    ───────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 8px; border: 1.5px solid transparent;
+      font-family: var(--font-b); font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s ease; line-height: 1;
+    }
+    .btn .icon { width: 16px; height: 16px; }
+    .btn-primary { background: var(--cyan); color: #fff; border-color: var(--cyan); }
+    .btn-primary:hover { filter: brightness(1.08); box-shadow: 0 4px 20px rgba(0,168,200,0.35); }
+    .btn-outline { background: transparent; color: var(--orange); border-color: var(--orange); }
+    .btn-outline:hover { background: var(--orange); color: #fff; box-shadow: 0 4px 20px rgba(245,90,30,0.28); }
+
+    /* ─────────────────────────────────────────────────────
+       Navigation
+    ───────────────────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav__inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 40px;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav__logo { font-family: var(--font-d); font-size: 20px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
+    .nav__logo em { font-style: normal; color: var(--cyan); }
+    .nav__links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav__links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color 0.15s; }
+    .nav__links a:hover { color: var(--navy); }
+    .nav__links a.active { color: var(--navy); font-weight: 600; }
+    .nav__cta { padding: 9px 22px; font-size: 14px; }
+
+    /* ─────────────────────────────────────────────────────
+       Hamburger / Mobile Nav
+    ───────────────────────────────────────────────────── */
+    .nav__hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      color: var(--navy); padding: 6px; border-radius: 6px; transition: background 0.15s;
+    }
+    .nav__hamburger:hover { background: var(--surface); }
+    .nav__hamburger .icon { width: 22px; height: 22px; }
+    .nav__mobile {
+      position: absolute; top: 64px; left: 0; right: 0;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px 24px;
+      box-shadow: 0 8px 32px rgba(13,15,30,0.08);
+      display: none;
+    }
+    .nav__mobile.open { display: block; }
+    .nav__mobile__links { list-style: none; margin-bottom: 16px; }
+    .nav__mobile__links li a {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+      font-size: 15px; font-weight: 500; color: var(--navy); transition: color 0.15s;
+    }
+    .nav__mobile__links li:last-child a { border-bottom: none; }
+    .nav__mobile__links li a:hover { color: var(--cyan); }
+    .nav__mobile__cta { width: 100%; justify-content: center; margin-top: 8px; }
+
+    /* ─────────────────────────────────────────────────────
+       Page Hero
+    ───────────────────────────────────────────────────── */
+    .page-hero {
+      background: var(--navy);
+      padding-top: 184px;
+      padding-bottom: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(0,168,200,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .page-hero__tag {
+      background: rgba(0,168,200,0.2); color: var(--cyan);
+      border-radius: 999px; padding: 4px 14px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      display: inline-block; margin-bottom: 20px;
+    }
+    .page-hero__title { color: #fff; margin-bottom: 16px; }
+    .page-hero__sub { font-size: 18px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+
+    /* ─────────────────────────────────────────────────────
+       Section Header
+    ───────────────────────────────────────────────────── */
+    .section-header { margin-bottom: 64px; }
+    .section-header--center { text-align: center; }
+    .section-header p { margin-top: 14px; color: var(--muted); font-size: 15px; max-width: 520px; }
+    .divider-line {
+      width: 48px; height: 3px; border-radius: 3px; margin-top: 20px;
+      background: linear-gradient(90deg, var(--cyan), var(--orange));
+    }
+
+    /* ─────────────────────────────────────────────────────
+       Business 01 — Featured Card (horizontal)
+    ───────────────────────────────────────────────────── */
+    .featured-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-card);
+      display: grid; grid-template-columns: 55fr 45fr;
+    }
+    .featured-card__content {
+      padding: 52px; border-right: 1px solid var(--border); position: relative;
+    }
+    .featured-card__topbar {
+      position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--cyan);
+    }
+    .featured-card__num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+    .featured-card__concept { font-size: 14px; color: var(--cyan); font-weight: 500; margin: 10px 0 20px; font-style: italic; }
+    .featured-card__desc { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 36px; }
+    .feat-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+    .feat-item { display: flex; align-items: flex-start; gap: 14px; }
+    .feat-item__icon { width: 20px; height: 20px; color: var(--cyan); flex-shrink: 0; margin-top: 2px; }
+    .feat-item__label { font-family: var(--font-d); font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+    .feat-item__text  { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* DPLite widget (light) */
+    .featured-card__visual {
+      background: var(--surface); padding: 40px 36px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .dp-widget {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 16px; width: 100%;
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+    .dp-widget__header {
+      padding: 16px 20px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .dp-widget__title { font-family: var(--font-d); font-size: 13px; font-weight: 700; color: var(--navy); }
+    .dp-live {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 10px; font-weight: 600; color: var(--cyan); letter-spacing: 0.05em;
+    }
+    .dp-live__dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--cyan);
+      animation: blink 1.5s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+    .dp-widget__chart { padding: 16px 20px 8px; }
+    .dp-sparkline { width: 100%; display: block; }
+    .dp-spark-line {
+      stroke-dasharray: 500; stroke-dashoffset: 500;
+    }
+    .dp-spark-line.animated { animation: drawLine 1.4s var(--ease-out) 0.4s forwards; }
+    .dp-spark-area { opacity: 0; }
+    .dp-spark-area.animated { animation: fadeArea 0.8s ease 1.0s forwards; }
+    @keyframes drawLine { to { stroke-dashoffset: 0; } }
+    @keyframes fadeArea { to { opacity: 1; } }
+    .dp-metrics {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+    }
+    .dp-metric {
+      padding: 16px 20px; border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .dp-metric:last-child { border-right: none; }
+    .dp-metric__label { font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+    .dp-metric__value { font-family: var(--font-d); font-size: 18px; font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; line-height: 1; }
+    .dp-metric__value--up { color: var(--cyan); }
+    .dp-metric__value--orange { color: var(--orange); }
+
+    /* ─────────────────────────────────────────────────────
+       Business 02 — AI Consulting (3-col grid)
+    ───────────────────────────────────────────────────── */
+    .biz2-header {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+      align-items: end; margin-bottom: 48px;
+    }
+    .biz2-header__concept { font-size: 15px; color: var(--orange); font-weight: 500; margin-top: 10px; }
+    .biz2-header__desc { font-size: 15px; color: var(--muted); line-height: 1.8; }
+
+    .ai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .ai-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: 16px;
+      padding: 30px; box-shadow: var(--shadow-card);
+      transition: all 0.22s ease; position: relative; overflow: hidden;
+    }
+    .ai-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--orange); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s var(--ease-out);
+    }
+    .ai-card:hover::after { transform: scaleX(1); }
+    .ai-card:hover { border-color: var(--orange); transform: translateY(-4px); box-shadow: 0 8px 32px rgba(245,90,30,0.10); }
+    .ai-card__icon {
+      width: 46px; height: 46px; border-radius: 12px;
+      background: var(--orange-light); color: var(--orange);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+    }
+    .ai-card__icon .icon { width: 20px; height: 20px; }
+    .ai-card__title { font-family: var(--font-d); font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.3; }
+    .ai-card__text  { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* ─────────────────────────────────────────────────────
+       CTA Section
+    ───────────────────────────────────────────────────── */
+    .cta-section { padding: 100px 0; text-align: center; }
+    .cta-section__title { font-family: var(--font-d); font-size: clamp(28px, 3.5vw, 44px); font-weight: 700; color: var(--navy); margin-bottom: 16px; letter-spacing: -0.02em; }
+    .cta-section__sub { font-size: 15px; color: var(--muted); margin-bottom: 40px; }
+    .cta-section__actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* ─────────────────────────────────────────────────────
+       Sticky CTA (mobile)
+    ───────────────────────────────────────────────────── */
+    .sticky-cta {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border);
+      padding: 12px 20px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
+      box-shadow: 0 -4px 20px rgba(13,15,30,0.08);
+    }
+    .sticky-cta__inner { display: flex; gap: 10px; }
+    .sticky-cta__inner .btn { flex: 1; justify-content: center; font-size: 14px; padding: 12px; }
+
+    /* ─────────────────────────────────────────────────────
+       Footer
+    ───────────────────────────────────────────────────── */
+    .footer { border-top: 1px solid var(--border); padding: 64px 0 32px; }
+    .footer__top { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; margin-bottom: 48px; }
+    .footer__logo { font-family: var(--font-d); font-size: 20px; font-weight: 700; color: var(--navy); display: block; margin-bottom: 10px; }
+    .footer__logo em { font-style: normal; color: var(--cyan); }
+    .footer__tagline { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .footer__address { font-size: 12px; color: var(--muted); line-height: 1.7; }
+    .footer__nav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .footer__nav-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); margin-bottom: 14px; display: block; }
+    .footer__nav-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer__nav-col ul li a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
+    .footer__nav-col ul li a:hover { color: var(--navy); }
+    .footer__bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+    .footer__copy { font-size: 13px; color: var(--muted); }
+
+    /* ─────────────────────────────────────────────────────
+       Scroll animations
+    ───────────────────────────────────────────────────── */
+    .fade-up {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+    }
+    .fade-up.visible { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.16s; }
+    .d3 { transition-delay: 0.24s; }
+    .d4 { transition-delay: 0.32s; }
+
+    /* ─────────────────────────────────────────────────────
+       Responsive
+    ───────────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-card__content { border-right: none; border-bottom: 1px solid var(--border); }
+      .biz2-header { grid-template-columns: 1fr; gap: 16px; }
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .section { padding: 80px 0; }
+      .nav__links, .nav__cta { display: none; }
+      .nav__hamburger { display: flex; align-items: center; }
+      .page-hero { padding-top: 120px; padding-bottom: 64px; }
+      .ai-grid { grid-template-columns: 1fr; }
+      .sticky-cta { display: block; }
+      .footer__top { grid-template-columns: 1fr; gap: 40px; }
+      .footer__nav-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .footer__bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────────── -->
+  <nav class="nav" id="mainNav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">NORD<em>-X</em></a>
+      <ul class="nav__links">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="services.html" style="color: var(--navy); font-weight: 600;">サービス</a></li>
+        <li><a href="company.html">会社概要</a></li>
+        <li><a href="news.html">ニュース</a></li>
+        <li><a href="careers.html">採用情報</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary nav__cta">
+        お問い合わせ <i data-lucide="arrow-right" class="icon"></i>
+      </a>
+      <button class="nav__hamburger" id="navHamburger" aria-label="メニューを開く">
+        <i data-lucide="menu" class="icon"></i>
+      </button>
+    </div>
+    <div class="nav__mobile" id="navMobile">
+      <ul class="nav__mobile__links">
+        <li><a href="index.html">ホーム <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="services.html">サービス <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="company.html">会社概要 <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="news.html">ニュース <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="careers.html">採用情報 <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary nav__mobile__cta">
+        <i data-lucide="send" class="icon"></i> お問い合わせ
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── Page Hero ────────────────────────────────────────────── -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__tag">Services</div>
+      <h1 class="h-xl page-hero__title">サービス</h1>
+      <p class="page-hero__sub">データと実装で、ビジネスを前進させる。</p>
+    </div>
+  </section>
+
+  <!-- ── Business 01: DPLite ───────────────────────────────────── -->
+  <section class="section" id="dplite">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="tag tag--surface">Business 01</div>
+        <h2 class="h-lg">Dynamic Pricing Lite</h2>
+        <p>宿泊業特化型の収益管理プラットフォーム。価格戦略を、勘ではなくデータで動かす。</p>
+        <div class="divider-line"></div>
+      </div>
+
+      <div class="featured-card fade-up">
+        <div class="featured-card__content">
+          <div class="featured-card__topbar"></div>
+          <p class="featured-card__num">Business 01 — Dynamic Pricing Lite</p>
+          <h3 style="font-family:var(--font-d);font-size:clamp(20px,2.2vw,26px);font-weight:700;color:var(--navy);line-height:1.25;margin-bottom:8px;">宿泊業特化型<br>収益管理プラットフォーム</h3>
+          <p class="featured-card__concept">属人化した価格戦略を、データによる精密な意思決定へ。</p>
+          <p class="featured-card__desc">
+            OTA予約実績・人流・気象・地域イベントデータを統合し、
+            AIが「今、売るべき最適な価格」を自動で提示します。
+            既存の運用フローを崩さず、主要サイトコントローラーとシームレスに連携。
+          </p>
+          <ul class="feat-list">
+            <li class="feat-item">
+              <i data-lucide="plug" class="feat-item__icon"></i>
+              <div>
+                <p class="feat-item__label">Seamless Integration</p>
+                <p class="feat-item__text">手間いらず・TL-リンカーン・ねっぱん！と連携。既存フローを崩さず導入できます。</p>
+              </div>
+            </li>
+            <li class="feat-item">
+              <i data-lucide="map-pin" class="feat-item__icon"></i>
+              <div>
+                <p class="feat-item__label">Local Data Moat</p>
+                <p class="feat-item__text">大手が見落とす北海道各地域のニッチな需要変動を網羅します。</p>
+              </div>
+            </li>
+            <li class="feat-item">
+              <i data-lucide="users" class="feat-item__icon"></i>
+              <div>
+                <p class="feat-item__label">Partnering</p>
+                <p class="feat-item__text">専門アナリストによる月次改善支援で、導入後も継続的に成果を伸ばします。</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- DPLite Widget (light) -->
+        <div class="featured-card__visual">
+          <div class="dp-widget">
+            <div class="dp-widget__header">
+              <span class="dp-widget__title">収益トレンド — 今週</span>
+              <span class="dp-live"><span class="dp-live__dot"></span>LIVE</span>
+            </div>
+            <div class="dp-widget__chart">
+              <svg class="dp-sparkline" viewBox="0 0 320 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- grid -->
+                <line x1="0" y1="72" x2="320" y2="72" stroke="#E4E8F2" stroke-width="1"/>
+                <line x1="0" y1="48" x2="320" y2="48" stroke="#E4E8F2" stroke-width="1"/>
+                <line x1="0" y1="24" x2="320" y2="24" stroke="#E4E8F2" stroke-width="1"/>
+                <!-- area -->
+                <path class="dp-spark-area"
+                  d="M0 62 C 40 58 60 64 90 54 C 118 44 135 40 165 30 C 192 20 212 26 245 16 C 270 8 295 4 320 2 L 320 80 L 0 80 Z"
+                  fill="url(#spGrad)"/>
+                <!-- line -->
+                <path class="dp-spark-line"
+                  d="M0 62 C 40 58 60 64 90 54 C 118 44 135 40 165 30 C 192 20 212 26 245 16 C 270 8 295 4 320 2"
+                  stroke="#00A8C8" stroke-width="2" stroke-linecap="round"/>
+                <!-- today dot -->
+                <circle cx="320" cy="2" r="4" fill="#F55A1E" opacity="0">
+                  <animate attributeName="opacity" from="0" to="1" begin="1.4s" dur="0.3s" fill="freeze"/>
+                </circle>
+                <!-- x labels -->
+                <text x="0"   y="86" font-size="8" fill="#B0BAD0" font-family="Inter,sans-serif">Mon</text>
+                <text x="80"  y="86" font-size="8" fill="#B0BAD0" font-family="Inter,sans-serif">Tue</text>
+                <text x="158" y="86" font-size="8" fill="#B0BAD0" font-family="Inter,sans-serif">Wed</text>
+                <text x="236" y="86" font-size="8" fill="#B0BAD0" font-family="Inter,sans-serif">Thu</text>
+                <text x="297" y="86" font-size="8" fill="#F55A1E" font-family="Inter,sans-serif" font-weight="600">Today</text>
+                <defs>
+                  <linearGradient id="spGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%"   stop-color="#00A8C8" stop-opacity="0.12"/>
+                    <stop offset="100%" stop-color="#00A8C8" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="dp-metrics">
+              <div class="dp-metric">
+                <span class="dp-metric__label">推奨価格</span>
+                <span class="dp-metric__value">¥18,500</span>
+              </div>
+              <div class="dp-metric">
+                <span class="dp-metric__label">先週比</span>
+                <span class="dp-metric__value dp-metric__value--up">+12%</span>
+              </div>
+              <div class="dp-metric">
+                <span class="dp-metric__label">稼働率</span>
+                <span class="dp-metric__value dp-metric__value--orange">87%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Business 02: AI Consulting ───────────────────────────── -->
+  <section class="section section--surface" id="consulting">
+    <div class="container">
+      <div class="biz2-header fade-up">
+        <div>
+          <div class="tag tag--orange">Business 02</div>
+          <h2 class="h-lg">AI &amp; DX Consulting</h2>
+          <p class="biz2-header__concept">人手不足を、AIという「相棒」で解消する。</p>
+        </div>
+        <p class="biz2-header__desc">
+          ITリソースに課題を抱える地方の中小企業へ、生成AIや業務自動化を
+          実効性のある形で導入します。「使えるAI」の選定から運用定着まで、一緒に作ります。
+        </p>
+      </div>
+
+      <div class="ai-grid">
+        <div class="ai-card fade-up d1">
+          <div class="ai-card__icon"><i data-lucide="search" class="icon"></i></div>
+          <p class="ai-card__title">現場に根付く<br>AI実装支援</p>
+          <p class="ai-card__text">即効性の高いツール選定と、現場に根付く運用フローを構築します。ChatGPT活用から定型業務の自動化まで。</p>
+        </div>
+        <div class="ai-card fade-up d2">
+          <div class="ai-card__icon"><i data-lucide="zap" class="icon"></i></div>
+          <p class="ai-card__title">少人数で最大成果を<br>出す組織へ</p>
+          <p class="ai-card__text">少ない人数で成果を最大化する「稼げる組織」への変革を支援。人手不足という構造問題に正面から向き合います。</p>
+        </div>
+        <div class="ai-card fade-up d3">
+          <div class="ai-card__icon"><i data-lucide="target" class="icon"></i></div>
+          <p class="ai-card__title">売上・コスト削減に<br>直結するDX</p>
+          <p class="ai-card__text">デジタル化が目的ではなく、売上向上・コスト削減という数字にコミット。導入後の成果まで一緒に追います。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ──────────────────────────────────────────────────── -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="fade-up">
+        <h2 class="cta-section__title">まずはお気軽にご相談ください</h2>
+        <p class="cta-section__sub">DPLiteのデモ依頼・AI導入のご相談など、どんなことでもお聞きします。</p>
+        <div class="cta-section__actions">
+          <a href="contact.html" class="btn btn-primary">
+            <i data-lucide="send" class="icon"></i> お問い合わせ・相談する
+          </a>
+          <a href="company.html" class="btn btn-outline">
+            会社概要を見る <i data-lucide="arrow-right" class="icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">NORD<em>-X</em></a>
+          <p class="footer__tagline">データが、一番正直だ。</p>
+          <p class="footer__address">〒001-0024 北海道札幌市北区<br>北24条西19丁目5-21</p>
+        </div>
+        <div class="footer__nav-grid">
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">サービス</span>
+            <ul>
+              <li><a href="services.html">Dynamic Pricing Lite</a></li>
+              <li><a href="services.html">AI &amp; DX Consulting</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">会社</span>
+            <ul>
+              <li><a href="company.html">会社概要</a></li>
+              <li><a href="news.html">ニュース</a></li>
+              <li><a href="careers.html">採用情報</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">Contact</span>
+            <ul>
+              <li><a href="contact.html">お問い合わせ</a></li>
+              <li><a href="mailto:kori23172@gmail.com">kori23172@gmail.com</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">© 2026 株式会社NORD-X. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── Sticky CTA (mobile) ───────────────────────────────────── -->
+  <div class="sticky-cta" id="stickyCta">
+    <div class="sticky-cta__inner">
+      <a href="contact.html" class="btn btn-primary">
+        <i data-lucide="send" class="icon"></i> まずは相談する
+      </a>
+      <a href="mailto:kori23172@gmail.com" class="btn btn-outline">メール</a>
+    </div>
+  </div>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>
+    lucide.createIcons();
+
+    /* ── Hamburger menu ──────────────────────────────────── */
+    const hamburger = document.getElementById('navHamburger');
+    const mobileNav = document.getElementById('navMobile');
+    let menuOpen = false;
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menuOpen = !menuOpen;
+        mobileNav.classList.toggle('open', menuOpen);
+        const icon = hamburger.querySelector('i[data-lucide]');
+        if (icon) { icon.setAttribute('data-lucide', menuOpen ? 'x' : 'menu'); lucide.createIcons(); }
+      });
+      document.addEventListener('click', (e) => {
+        if (menuOpen && !mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
+          menuOpen = false; mobileNav.classList.remove('open');
+          const icon = hamburger.querySelector('i[data-lucide]');
+          if (icon) { icon.setAttribute('data-lucide', 'menu'); lucide.createIcons(); }
+        }
+      });
+      mobileNav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          menuOpen = false; mobileNav.classList.remove('open');
+          const icon = hamburger.querySelector('i[data-lucide]');
+          if (icon) { icon.setAttribute('data-lucide', 'menu'); lucide.createIcons(); }
+        });
+      });
+    }
+
+    /* ── DPLite widget sparkline ────────────────────────────── */
+    const sparkObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        document.querySelector('.dp-spark-line')?.classList.add('animated');
+        document.querySelector('.dp-spark-area')?.classList.add('animated');
+        sparkObs.disconnect();
+      });
+    }, { threshold: 0.3 });
+    const widget = document.querySelector('.dp-widget');
+    if (widget) sparkObs.observe(widget);
+
+    /* ── Scroll fade-up ──────────────────────────────────── */
+    const fadeObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+  </script>
+
+</body>
+</html>

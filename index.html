@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>株式会社NORD-X — データが、一番正直だ。</title>
+  <meta name="description" content="AIとデータサイエンスで宿泊業の収益最大化と中小企業のDXを支援する、北海道発のスタートアップ。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─────────────────────────────────────────────────────
+       Reset & Variables
+    ───────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white:        #FFFFFF;
+      --surface:      #F4F6FB;
+      --border:       #E4E8F2;
+      --navy:         #0D0F1E;
+      --body:         #2C3252;
+      --muted:        #7A849A;
+      --cyan:         #00A8C8;
+      --cyan-light:   #E6F7FB;
+      --orange:       #F55A1E;
+      --orange-light: #FFF0EB;
+      --shadow-card:  0 2px 16px rgba(13,15,30,0.07);
+      --shadow-hover: 0 8px 40px rgba(0,168,200,0.15);
+      --shadow-mock:  0 16px 48px rgba(13,15,30,0.12);
+      --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+      --font-d:       'Syne', sans-serif;
+      --font-b:       'Inter', sans-serif;
+      --max-w:        1200px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--body);
+      font-family: var(--font-b);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+    .section    { padding: 120px 0; }
+    .section--surface { background: var(--surface); }
+    .section--navy { background: var(--navy); }
+
+    /* ─────────────────────────────────────────────────────
+       Typography
+    ───────────────────────────────────────────────────── */
+    .h-xl {
+      font-family: var(--font-d); font-weight: 800;
+      font-size: clamp(48px, 6.5vw, 76px);
+      line-height: 1.08; letter-spacing: -0.03em; color: var(--navy);
+    }
+    .h-lg {
+      font-family: var(--font-d); font-weight: 700;
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.2; letter-spacing: -0.02em; color: var(--navy);
+    }
+    .tag {
+      display: inline-block; padding: 4px 14px;
+      background: var(--cyan-light); color: var(--cyan);
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border-radius: 999px; margin-bottom: 20px;
+    }
+    .tag--orange { background: var(--orange-light); color: var(--orange); }
+
+    /* ─────────────────────────────────────────────────────
+       Buttons
+    ───────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 8px; border: 1.5px solid transparent;
+      font-family: var(--font-b); font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s ease; line-height: 1;
+    }
+    .btn .icon { width: 16px; height: 16px; }
+    .btn-primary { background: var(--cyan); color: #fff; border-color: var(--cyan); }
+    .btn-primary:hover { filter: brightness(1.08); box-shadow: 0 4px 20px rgba(0,168,200,0.35); }
+    .btn-outline { background: transparent; color: var(--orange); border-color: var(--orange); }
+    .btn-outline:hover { background: var(--orange); color: #fff; box-shadow: 0 4px 20px rgba(245,90,30,0.28); }
+    .btn-white { background: #fff; color: var(--navy); border-color: #fff; }
+    .btn-white:hover { background: rgba(255,255,255,0.9); box-shadow: 0 4px 20px rgba(255,255,255,0.2); }
+    .btn-outline-white { background: transparent; color: #fff; border-color: rgba(255,255,255,0.5); }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+
+    /* ─────────────────────────────────────────────────────
+       Navigation
+    ───────────────────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav__inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 40px;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav__logo { font-family: var(--font-d); font-size: 20px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
+    .nav__logo em { font-style: normal; color: var(--cyan); }
+    .nav__links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav__links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color 0.15s; }
+    .nav__links a:hover { color: var(--navy); }
+    .nav__links a.active { color: var(--navy); font-weight: 600; }
+    .nav__cta { padding: 9px 22px; font-size: 14px; }
+
+    /* ─────────────────────────────────────────────────────
+       Hamburger / Mobile Nav
+    ───────────────────────────────────────────────────── */
+    .nav__hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      color: var(--navy); padding: 6px; border-radius: 6px; transition: background 0.15s;
+    }
+    .nav__hamburger:hover { background: var(--surface); }
+    .nav__hamburger .icon { width: 22px; height: 22px; }
+    .nav__mobile {
+      position: absolute; top: 64px; left: 0; right: 0;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px 24px;
+      box-shadow: 0 8px 32px rgba(13,15,30,0.08);
+      display: none;
+    }
+    .nav__mobile.open { display: block; }
+    .nav__mobile__links { list-style: none; margin-bottom: 16px; }
+    .nav__mobile__links li a {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+      font-size: 15px; font-weight: 500; color: var(--navy); transition: color 0.15s;
+    }
+    .nav__mobile__links li:last-child a { border-bottom: none; }
+    .nav__mobile__links li a:hover { color: var(--cyan); }
+    .nav__mobile__cta { width: 100%; justify-content: center; margin-top: 8px; }
+
+    /* ─────────────────────────────────────────────────────
+       Hero
+    ───────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; padding-top: 64px;
+      background: linear-gradient(155deg, #eef4ff 0%, #ffffff 50%, #fff7f4 100%);
+      overflow: hidden; position: relative;
+    }
+    .hero__inner {
+      display: grid; grid-template-columns: 55fr 45fr;
+      gap: 64px; align-items: center; width: 100%;
+    }
+    .hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 28px;
+    }
+    .hero__eyebrow::before {
+      content: ''; display: block; width: 28px; height: 2px;
+      background: var(--cyan); border-radius: 2px;
+    }
+    .hero__title { margin-bottom: 28px; }
+    .hero__title .accent { color: var(--cyan); }
+    .hero__desc {
+      font-size: 16px; color: var(--body); line-height: 1.85;
+      max-width: 520px; margin-bottom: 44px;
+    }
+    .hero__desc strong { color: var(--navy); font-weight: 600; }
+    .hero__actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* Hero word stagger */
+    .hero-word {
+      display: inline-block;
+      opacity: 0; transform: translateY(14px);
+    }
+    .hero-word.visible {
+      animation: wordIn 0.55s var(--ease-out) forwards;
+    }
+    @keyframes wordIn { to { opacity: 1; transform: none; } }
+
+    /* ─────────────────────────────────────────────────────
+       Hero Chart (SVG mockup)
+    ───────────────────────────────────────────────────── */
+    .hero__visual { position: relative; }
+    .chart-wrap {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px 28px 20px;
+      box-shadow: var(--shadow-mock);
+    }
+    .chart-header {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px;
+    }
+    .chart-header__title { font-family: var(--font-d); font-size: 14px; font-weight: 700; color: var(--navy); }
+    .chart-header__badge {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+      background: var(--cyan-light); color: var(--cyan);
+      padding: 3px 10px; border-radius: 999px;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .chart-header__badge::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--cyan);
+      animation: blink 1.5s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+
+    .chart-svg { width: 100%; height: auto; display: block; }
+    .chart-line {
+      stroke-dasharray: 700; stroke-dashoffset: 700;
+    }
+    .chart-line.animated {
+      animation: drawLine 1.8s var(--ease-out) 0.3s forwards;
+    }
+    .chart-area { opacity: 0; }
+    .chart-area.animated { animation: fadeArea 1.0s ease 1.2s forwards; }
+    .chart-dot { opacity: 0; }
+    .chart-dot.animated { animation: popIn 0.3s var(--ease-out) 1.6s forwards; }
+    .chart-dot-last.animated { animation: popIn 0.3s var(--ease-out) 1.75s forwards; }
+    @keyframes drawLine { to { stroke-dashoffset: 0; } }
+    @keyframes fadeArea { to { opacity: 1; } }
+    @keyframes popIn { from { opacity:0; transform:scale(0.2); } to { opacity:1; transform:scale(1); } }
+
+    .chart-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 14px; border-top: 1px solid var(--border); margin-top: 4px;
+    }
+    .chart-price { display: flex; flex-direction: column; gap: 2px; }
+    .chart-price__label { font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+    .chart-price__value { font-family: var(--font-d); font-size: 22px; font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; opacity: 0; }
+    .chart-price__value.visible { animation: fadeIn 0.4s ease 2.1s forwards; }
+    @keyframes fadeIn { to { opacity: 1; } }
+    .chart-badge {
+      font-size: 13px; font-weight: 700; color: #fff;
+      background: var(--orange); padding: 6px 14px; border-radius: 999px;
+      opacity: 0;
+    }
+    .chart-badge.visible { animation: fadeIn 0.4s ease 2.2s forwards; }
+
+    .hero__scroll {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+    }
+    .hero__scroll::after {
+      content: ''; width: 1px; height: 36px;
+      background: linear-gradient(to bottom, var(--cyan), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100%{opacity:1;} 50%{opacity:0.15;} }
+
+    /* ─────────────────────────────────────────────────────
+       Stats Bar
+    ───────────────────────────────────────────────────── */
+    .stats-bar { background: var(--navy); }
+    .stats-bar__inner {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      max-width: var(--max-w); margin: 0 auto; padding: 0 40px;
+    }
+    .stat {
+      padding: 44px 40px; border-right: 1px solid rgba(255,255,255,0.07);
+    }
+    .stat:last-child { border-right: none; }
+    .stat__num {
+      font-family: var(--font-d); font-size: 52px; font-weight: 800;
+      line-height: 1; letter-spacing: -0.03em; color: #fff;
+      font-variant-numeric: tabular-nums; margin-bottom: 8px;
+    }
+    .stat__num .accent { color: var(--cyan); }
+    .stat__label { font-size: 14px; color: rgba(255,255,255,0.45); }
+
+    /* ─────────────────────────────────────────────────────
+       Section Header
+    ───────────────────────────────────────────────────── */
+    .section-header { margin-bottom: 64px; }
+    .section-header--center { text-align: center; }
+    .section-header p { margin-top: 14px; color: var(--muted); font-size: 15px; max-width: 520px; }
+    .section-header--center p { margin-left: auto; margin-right: auto; }
+    .divider-line {
+      width: 48px; height: 3px; border-radius: 3px; margin-top: 20px;
+      background: linear-gradient(90deg, var(--cyan), var(--orange));
+    }
+    .divider-line--center { margin-left: auto; margin-right: auto; }
+
+    /* ─────────────────────────────────────────────────────
+       Services Teaser
+    ───────────────────────────────────────────────────── */
+    .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 48px; }
+    .service-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px 36px;
+      box-shadow: var(--shadow-card); transition: all 0.22s ease;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--orange));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.35s var(--ease-out);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+    .service-card__icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .service-card__icon--cyan { background: var(--cyan-light); color: var(--cyan); }
+    .service-card__icon--orange { background: var(--orange-light); color: var(--orange); }
+    .service-card__icon .icon { width: 24px; height: 24px; }
+    .service-card__title { font-family: var(--font-d); font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .service-card__sub { font-size: 13px; font-weight: 600; color: var(--cyan); margin-bottom: 12px; }
+    .service-card__sub--orange { color: var(--orange); }
+    .service-card__text { font-size: 14px; color: var(--muted); line-height: 1.75; }
+    .section-cta { text-align: right; }
+
+    /* ─────────────────────────────────────────────────────
+       About / News Teaser (2-col)
+    ───────────────────────────────────────────────────── */
+    .about-news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .about-teaser__title { font-family: var(--font-d); font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+    .about-teaser__text { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 24px; }
+    .about-teaser__link { font-size: 14px; font-weight: 600; color: var(--cyan); display: inline-flex; align-items: center; gap: 6px; transition: gap 0.15s; }
+    .about-teaser__link:hover { gap: 10px; }
+    .news-teaser__title { font-family: var(--font-d); font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
+    .news-teaser__list { list-style: none; display: flex; flex-direction: column; gap: 0; margin-bottom: 24px; }
+    .news-teaser__item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+    }
+    .news-teaser__item:first-child { border-top: 1px solid var(--border); }
+    .news-teaser__date { font-size: 12px; color: var(--muted); white-space: nowrap; margin-top: 2px; flex-shrink: 0; }
+    .news-teaser__item-title { font-size: 14px; font-weight: 600; color: var(--navy); line-height: 1.5; }
+    .news-teaser__link { font-size: 14px; font-weight: 600; color: var(--cyan); display: inline-flex; align-items: center; gap: 6px; transition: gap 0.15s; }
+    .news-teaser__link:hover { gap: 10px; }
+
+    /* ─────────────────────────────────────────────────────
+       Careers CTA (navy section)
+    ───────────────────────────────────────────────────── */
+    .careers-cta { text-align: center; }
+    .careers-cta__title {
+      font-family: var(--font-d); font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700; color: #fff; margin-bottom: 16px; letter-spacing: -0.02em;
+    }
+    .careers-cta__desc { font-size: 16px; color: rgba(255,255,255,0.65); line-height: 1.75; max-width: 520px; margin: 0 auto 36px; }
+
+    /* ─────────────────────────────────────────────────────
+       Sticky CTA (mobile)
+    ───────────────────────────────────────────────────── */
+    .sticky-cta {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border);
+      padding: 12px 20px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
+      box-shadow: 0 -4px 20px rgba(13,15,30,0.08);
+    }
+    .sticky-cta__inner { display: flex; gap: 10px; }
+    .sticky-cta__inner .btn { flex: 1; justify-content: center; font-size: 14px; padding: 12px; }
+
+    /* ─────────────────────────────────────────────────────
+       Footer
+    ───────────────────────────────────────────────────── */
+    .footer { border-top: 1px solid var(--border); padding: 64px 0 32px; }
+    .footer__top { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; margin-bottom: 48px; }
+    .footer__logo { font-family: var(--font-d); font-size: 20px; font-weight: 700; color: var(--navy); display: block; margin-bottom: 10px; }
+    .footer__logo em { font-style: normal; color: var(--cyan); }
+    .footer__tagline { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .footer__address { font-size: 12px; color: var(--muted); line-height: 1.7; }
+    .footer__nav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .footer__nav-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); margin-bottom: 14px; display: block; }
+    .footer__nav-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer__nav-col ul li a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
+    .footer__nav-col ul li a:hover { color: var(--navy); }
+    .footer__bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+    .footer__copy { font-size: 13px; color: var(--muted); }
+
+    /* ─────────────────────────────────────────────────────
+       Scroll animations
+    ───────────────────────────────────────────────────── */
+    .fade-up {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+    }
+    .fade-up.visible { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.16s; }
+    .d3 { transition-delay: 0.24s; }
+    .d4 { transition-delay: 0.32s; }
+
+    /* ─────────────────────────────────────────────────────
+       Responsive
+    ───────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .section { padding: 80px 0; }
+      .nav__links, .nav__cta { display: none; }
+      .nav__hamburger { display: flex; align-items: center; }
+      .hero__inner { grid-template-columns: 1fr; }
+      .hero__visual { display: none; }
+      .stats-bar__inner { grid-template-columns: 1fr; padding: 0 20px; }
+      .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+      .services-grid { grid-template-columns: 1fr; }
+      .about-news-grid { grid-template-columns: 1fr; gap: 48px; }
+      .section-cta { text-align: center; }
+      .sticky-cta { display: block; }
+      .footer__top { grid-template-columns: 1fr; gap: 40px; }
+      .footer__nav-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .footer__bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────────── -->
+  <nav class="nav" id="mainNav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">NORD<em>-X</em></a>
+      <ul class="nav__links">
+        <li><a href="index.html" style="color: var(--navy); font-weight: 600;">ホーム</a></li>
+        <li><a href="services.html">サービス</a></li>
+        <li><a href="company.html">会社概要</a></li>
+        <li><a href="news.html">ニュース</a></li>
+        <li><a href="careers.html">採用情報</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary nav__cta">
+        お問い合わせ <i data-lucide="arrow-right" class="icon"></i>
+      </a>
+      <button class="nav__hamburger" id="navHamburger" aria-label="メニューを開く">
+        <i data-lucide="menu" class="icon"></i>
+      </button>
+    </div>
+    <div class="nav__mobile" id="navMobile">
+      <ul class="nav__mobile__links">
+        <li><a href="index.html">ホーム <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="services.html">サービス <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="company.html">会社概要 <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="news.html">ニュース <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="careers.html">採用情報 <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary nav__mobile__cta">
+        <i data-lucide="send" class="icon"></i> お問い合わせ
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ─────────────────────────────────────────────────── -->
+  <section class="hero" id="top">
+    <div class="container">
+      <div class="hero__inner">
+
+        <!-- Left: Text -->
+        <div>
+          <p class="hero__eyebrow">Hokkaido-based AI &amp; DX Startup</p>
+          <h1 class="h-xl hero__title">
+            <span class="hero-word">データが、</span><br>
+            <span class="hero-word" style="animation-delay:.1s">一番</span><span class="hero-word accent" style="animation-delay:.18s; color:var(--cyan)">正直だ。</span>
+          </h1>
+          <p class="hero__desc">
+            AIとデータサイエンスで、宿泊業の収益最大化と<br>
+            中小企業の生産性向上を支援します。<br>
+            <strong>北海道発。実装重視。数字にコミット。</strong>
+          </p>
+          <div class="hero__actions">
+            <a href="services.html" class="btn btn-primary">サービスを見る <i data-lucide="arrow-right" class="icon"></i></a>
+            <a href="contact.html" class="btn btn-outline">まずは相談する</a>
+          </div>
+        </div>
+
+        <!-- Right: Animated price chart -->
+        <div class="hero__visual fade-up d2">
+          <div class="chart-wrap">
+            <div class="chart-header">
+              <span class="chart-header__title">Dynamic Pricing Lite</span>
+              <span class="chart-header__badge">LIVE DATA</span>
+            </div>
+            <svg class="chart-svg" viewBox="0 0 380 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Grid -->
+              <line x1="0" y1="155" x2="380" y2="155" stroke="#E4E8F2" stroke-width="1"/>
+              <line x1="0" y1="115" x2="380" y2="115" stroke="#E4E8F2" stroke-width="1"/>
+              <line x1="0" y1="75"  x2="380" y2="75"  stroke="#E4E8F2" stroke-width="1"/>
+              <line x1="0" y1="35"  x2="380" y2="35"  stroke="#E4E8F2" stroke-width="1"/>
+              <!-- Y labels -->
+              <text x="4" y="158" font-size="9" fill="#B0BAD0" font-family="Inter,sans-serif">¥12k</text>
+              <text x="4" y="118" font-size="9" fill="#B0BAD0" font-family="Inter,sans-serif">¥15k</text>
+              <text x="4" y="78"  font-size="9" fill="#B0BAD0" font-family="Inter,sans-serif">¥18k</text>
+              <text x="4" y="38"  font-size="9" fill="#B0BAD0" font-family="Inter,sans-serif">¥21k</text>
+              <!-- Area -->
+              <path class="chart-area"
+                d="M30 142 C 70 136 95 144 120 130 C 148 114 158 108 185 92 C 212 76 228 84 255 66 C 278 50 298 40 330 26 L 330 170 L 30 170 Z"
+                fill="url(#aGrad)"/>
+              <!-- Line -->
+              <path class="chart-line"
+                d="M30 142 C 70 136 95 144 120 130 C 148 114 158 108 185 92 C 212 76 228 84 255 66 C 278 50 298 40 330 26"
+                stroke="#00A8C8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Dots -->
+              <circle class="chart-dot" cx="185" cy="92"  r="4" fill="#00A8C8"/>
+              <circle class="chart-dot" cx="255" cy="66"  r="4" fill="#00A8C8" style="animation-delay:1.65s"/>
+              <circle class="chart-dot chart-dot-last" cx="330" cy="26" r="5.5" fill="#F55A1E"/>
+              <!-- X labels -->
+              <text x="22"  y="182" font-size="9" fill="#B0BAD0" font-family="Inter,sans-serif">Mon</text>
+              <text x="96"  y="182" font-size="9" fill="#B0BAD0" font-family="Inter,sans-serif">Tue</text>
+              <text x="170" y="182" font-size="9" fill="#B0BAD0" font-family="Inter,sans-serif">Wed</text>
+              <text x="240" y="182" font-size="9" fill="#B0BAD0" font-family="Inter,sans-serif">Thu</text>
+              <text x="308" y="182" font-size="9" fill="#F55A1E" font-family="Inter,sans-serif" font-weight="600">Today</text>
+              <defs>
+                <linearGradient id="aGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%"   stop-color="#00A8C8" stop-opacity="0.14"/>
+                  <stop offset="100%" stop-color="#00A8C8" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="chart-footer">
+              <div class="chart-price">
+                <span class="chart-price__label">今週の推奨価格</span>
+                <span class="chart-price__value" id="chartPrice">¥ 21,500</span>
+              </div>
+              <span class="chart-badge" id="chartBadge">先週比 +14%</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="hero__scroll">Scroll</div>
+  </section>
+
+  <!-- ── Stats Bar ─────────────────────────────────────────────── -->
+  <div class="stats-bar">
+    <div class="stats-bar__inner">
+      <div class="stat">
+        <div class="stat__num"><span class="counter" data-target="3">0</span><span class="accent">+</span></div>
+        <div class="stat__label">連携サイトコントローラー</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num"><span class="counter" data-target="24">0</span><span class="accent">h</span></div>
+        <div class="stat__label">データ自動収集・分析</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num"><span class="counter" data-target="100">0</span><span class="accent">%</span></div>
+        <div class="stat__label">OTA連携 既存フロー変更ゼロ</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Services Teaser ──────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="tag">Services</div>
+        <h2 class="h-lg">私たちのサービス</h2>
+        <p>データと実装で、ビジネスを前進させる。</p>
+        <div class="divider-line"></div>
+      </div>
+      <div class="services-grid">
+        <div class="service-card fade-up d1">
+          <div class="service-card__icon service-card__icon--cyan">
+            <i data-lucide="trending-up" class="icon"></i>
+          </div>
+          <h3 class="service-card__title">DPLite</h3>
+          <p class="service-card__sub">宿泊業向けダイナミックプライシング</p>
+          <p class="service-card__text">競合価格をリアルタイムで把握し、RevPARを最大化。OTA価格管理をデータドリブンに変える。</p>
+        </div>
+        <div class="service-card fade-up d2">
+          <div class="service-card__icon service-card__icon--orange">
+            <i data-lucide="cpu" class="icon"></i>
+          </div>
+          <h3 class="service-card__title">AI &amp; DX Consulting</h3>
+          <p class="service-card__sub service-card__sub--orange">中小企業のAI実装支援</p>
+          <p class="service-card__text">現場に根付く運用フローで、少人数で最大の成果を。ChatGPT活用から業務自動化まで一緒に作る。</p>
+        </div>
+      </div>
+      <div class="section-cta fade-up">
+        <a href="services.html" class="btn btn-primary">サービスを詳しく見る <i data-lucide="arrow-right" class="icon"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About / News Teaser ──────────────────────────────────── -->
+  <section class="section section--surface">
+    <div class="container">
+      <div class="about-news-grid">
+        <!-- Left: About -->
+        <div class="fade-up">
+          <div class="tag">About</div>
+          <h2 class="about-teaser__title">NORD-Xについて</h2>
+          <p class="about-teaser__text">
+            北海道発のAI・SaaSスタートアップ。「データが、一番正直だ。」をキャッチフレーズに、宿泊業と中小企業のデータ活用を支援します。<br><br>
+            固定概念より数字、感覚より検証。ローカルデータを武器に、実装にこだわった支援を提供しています。
+          </p>
+          <a href="company.html" class="about-teaser__link">会社概要を見る <i data-lucide="arrow-right" class="icon" style="width:14px;height:14px;"></i></a>
+        </div>
+        <!-- Right: News -->
+        <div class="fade-up d1">
+          <div class="tag">News</div>
+          <h2 class="news-teaser__title">最新ニュース</h2>
+          <ul class="news-teaser__list">
+            <li class="news-teaser__item">
+              <span class="news-teaser__date">2026.04.01</span>
+              <span class="news-teaser__item-title">AI &amp; DXコンサルティング事業を正式開始</span>
+            </li>
+            <li class="news-teaser__item">
+              <span class="news-teaser__date">2026.03.15</span>
+              <span class="news-teaser__item-title">Dynamic Pricing Lite、北海道初の導入契約締結</span>
+            </li>
+            <li class="news-teaser__item">
+              <span class="news-teaser__date">2026.02.20</span>
+              <span class="news-teaser__item-title">Dynamic Pricing Lite β版をリリース</span>
+            </li>
+          </ul>
+          <a href="news.html" class="news-teaser__link">ニュース一覧 <i data-lucide="arrow-right" class="icon" style="width:14px;height:14px;"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Careers CTA ──────────────────────────────────────────── -->
+  <section class="section section--navy">
+    <div class="container">
+      <div class="careers-cta fade-up">
+        <h2 class="careers-cta__title">「一緒に働きませんか？」</h2>
+        <p class="careers-cta__desc">北海道大学をはじめ、AIと地域創生に関心のある学生・社会人を募集中。創業期だからこそ、深く関われる。</p>
+        <a href="careers.html" class="btn btn-white">採用情報を見る <i data-lucide="arrow-right" class="icon"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">NORD<em>-X</em></a>
+          <p class="footer__tagline">データが、一番正直だ。</p>
+          <p class="footer__address">〒001-0024 北海道札幌市北区<br>北24条西19丁目5-21</p>
+        </div>
+        <div class="footer__nav-grid">
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">サービス</span>
+            <ul>
+              <li><a href="services.html">Dynamic Pricing Lite</a></li>
+              <li><a href="services.html">AI &amp; DX Consulting</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">会社</span>
+            <ul>
+              <li><a href="company.html">会社概要</a></li>
+              <li><a href="news.html">ニュース</a></li>
+              <li><a href="careers.html">採用情報</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">Contact</span>
+            <ul>
+              <li><a href="contact.html">お問い合わせ</a></li>
+              <li><a href="mailto:kori23172@gmail.com">kori23172@gmail.com</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">© 2026 株式会社NORD-X. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── Sticky CTA (mobile) ───────────────────────────────────── -->
+  <div class="sticky-cta" id="stickyCta">
+    <div class="sticky-cta__inner">
+      <a href="contact.html" class="btn btn-primary">
+        <i data-lucide="send" class="icon"></i> まずは相談する
+      </a>
+      <a href="mailto:kori23172@gmail.com" class="btn btn-outline">メール</a>
+    </div>
+  </div>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>
+    lucide.createIcons();
+
+    /* ── Hamburger menu ──────────────────────────────────── */
+    const hamburger = document.getElementById('navHamburger');
+    const mobileNav = document.getElementById('navMobile');
+    let menuOpen = false;
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menuOpen = !menuOpen;
+        mobileNav.classList.toggle('open', menuOpen);
+        const icon = hamburger.querySelector('i[data-lucide]');
+        if (icon) { icon.setAttribute('data-lucide', menuOpen ? 'x' : 'menu'); lucide.createIcons(); }
+      });
+      document.addEventListener('click', (e) => {
+        if (menuOpen && !mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
+          menuOpen = false; mobileNav.classList.remove('open');
+          const icon = hamburger.querySelector('i[data-lucide]');
+          if (icon) { icon.setAttribute('data-lucide', 'menu'); lucide.createIcons(); }
+        }
+      });
+      mobileNav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          menuOpen = false; mobileNav.classList.remove('open');
+          const icon = hamburger.querySelector('i[data-lucide]');
+          if (icon) { icon.setAttribute('data-lucide', 'menu'); lucide.createIcons(); }
+        });
+      });
+    }
+
+    /* ── Hero word reveal ──────────────────────────────────── */
+    document.querySelectorAll('.hero-word').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 100 + i * 90);
+    });
+
+    /* ── Hero chart animations ─────────────────────────────── */
+    setTimeout(() => {
+      document.querySelector('.chart-line')?.classList.add('animated');
+      document.querySelector('.chart-area')?.classList.add('animated');
+      document.querySelectorAll('.chart-dot').forEach(d => d.classList.add('animated'));
+      document.querySelectorAll('.chart-dot-last').forEach(d => d.classList.add('animated'));
+      setTimeout(() => {
+        document.getElementById('chartPrice')?.classList.add('visible');
+        document.getElementById('chartBadge')?.classList.add('visible');
+      }, 2100);
+    }, 500);
+
+    /* ── Scroll fade-up ──────────────────────────────────── */
+    const fadeObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+
+    /* ── Animated counters ─────────────────────────────────── */
+    const counterObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const target = parseInt(el.dataset.target, 10);
+        const start = performance.now();
+        const tick = (now) => {
+          const p = Math.min((now - start) / 1200, 1);
+          const ease = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.floor(ease * target);
+          if (p < 1) requestAnimationFrame(tick);
+          else el.textContent = target;
+        };
+        requestAnimationFrame(tick);
+        counterObs.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+  </script>
+
+</body>
+</html>

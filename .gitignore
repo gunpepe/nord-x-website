@@ -1,0 +1,44 @@
+# ── サイト関連ファイル以外をすべて除外（機密保護） ──────────────────
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 環境変数・機密情報
+.env
+.env.*
+
+# Python / AI エージェント
+*.py
+__pycache__/
+*.pyc
+requirements.txt
+logs/
+ai-news-slack/
+instagram-output/
+instagram_scheduler.py
+marketing/
+
+# ビジネス機密ドキュメント
+*.pdf
+*.pptx
+*.zip
+*.png
+hokkaido_hotel_emails.md
+README_AI_SQUAD.md
+sales_data/
+productivity-app/
+nord-x-instagram.skill
+preview.html
+
+# 内部資料（日本語ディレクトリ）
+引き継ぎ資料/
+事業計画書/
+本社ホテルリスト/
+全体議事録*/
+DP営業*/
+プライベート、シェア*/
+
+# Node
+node_modules/
