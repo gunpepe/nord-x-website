@@ -257,25 +257,6 @@
     }
     @keyframes scrollPulse { 0%,100%{opacity:1;} 50%{opacity:0.15;} }
 
-    /* ─────────────────────────────────────────────────────
-       Stats Bar
-    ───────────────────────────────────────────────────── */
-    .stats-bar { background: var(--navy); }
-    .stats-bar__inner {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      max-width: var(--max-w); margin: 0 auto; padding: 0 40px;
-    }
-    .stat {
-      padding: 44px 40px; border-right: 1px solid rgba(255,255,255,0.07);
-    }
-    .stat:last-child { border-right: none; }
-    .stat__num {
-      font-family: var(--font-d); font-size: 52px; font-weight: 800;
-      line-height: 1; letter-spacing: -0.03em; color: #fff;
-      font-variant-numeric: tabular-nums; margin-bottom: 8px;
-    }
-    .stat__num .accent { color: var(--cyan); }
-    .stat__label { font-size: 14px; color: rgba(255,255,255,0.45); }
 
     /* ─────────────────────────────────────────────────────
        Section Header
@@ -408,8 +389,6 @@
       .nav__hamburger { display: flex; align-items: center; }
       .hero__inner { grid-template-columns: 1fr; }
       .hero__visual { display: none; }
-      .stats-bar__inner { grid-template-columns: 1fr; padding: 0 20px; }
-      .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
       .services-grid { grid-template-columns: 1fr; }
       .about-news-grid { grid-template-columns: 1fr; gap: 48px; }
       .section-cta { text-align: center; }
@@ -535,23 +514,6 @@
     <div class="hero__scroll">Scroll</div>
   </section>
 
-  <!-- ── Stats Bar ─────────────────────────────────────────────── -->
-  <div class="stats-bar">
-    <div class="stats-bar__inner">
-      <div class="stat">
-        <div class="stat__num"><span class="counter" data-target="3">0</span><span class="accent">+</span></div>
-        <div class="stat__label">連携サイトコントローラー</div>
-      </div>
-      <div class="stat">
-        <div class="stat__num"><span class="counter" data-target="24">0</span><span class="accent">h</span></div>
-        <div class="stat__label">データ自動収集・分析</div>
-      </div>
-      <div class="stat">
-        <div class="stat__num"><span class="counter" data-target="100">0</span><span class="accent">%</span></div>
-        <div class="stat__label">OTA連携 既存フロー変更ゼロ</div>
-      </div>
-    </div>
-  </div>
 
   <!-- ── Services Teaser ──────────────────────────────────────── -->
   <section class="section">
