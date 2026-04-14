@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>プライバシーポリシー — 株式会社NORD-X</title>
+  <meta name="description" content="株式会社NORD-Xのプライバシーポリシー。個人情報の取り扱いについて。" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white:        #FFFFFF;
+      --surface:      #F4F6FB;
+      --border:       #E4E8F2;
+      --navy:         #0D0F1E;
+      --body:         #2C3252;
+      --muted:        #7A849A;
+      --cyan:         #00A8C8;
+      --cyan-light:   #E6F7FB;
+      --orange:       #F55A1E;
+      --orange-light: #FFF0EB;
+      --shadow-card:  0 2px 16px rgba(13,15,30,0.07);
+      --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+      --font-d:       'Syne', sans-serif;
+      --font-b:       'Inter', sans-serif;
+      --max-w:        1200px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--body);
+      font-family: var(--font-b);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+    .section { padding: 120px 0; }
+
+    /* Navigation */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav__inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 40px;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav__logo { font-family: var(--font-d); font-size: 20px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
+    .nav__logo em { font-style: normal; color: var(--cyan); }
+    .nav__links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav__links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color 0.15s; }
+    .nav__links a:hover { color: var(--navy); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 8px; border: 1.5px solid transparent;
+      font-family: var(--font-b); font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s ease; line-height: 1;
+    }
+    .btn .icon { width: 16px; height: 16px; }
+    .btn-primary { background: var(--cyan); color: #fff; border-color: var(--cyan); }
+    .btn-primary:hover { filter: brightness(1.08); box-shadow: 0 4px 20px rgba(0,168,200,0.35); }
+    .nav__cta { padding: 9px 22px; font-size: 14px; }
+    .nav__hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      color: var(--navy); padding: 6px; border-radius: 6px; transition: background 0.15s;
+    }
+    .nav__hamburger:hover { background: var(--surface); }
+    .nav__hamburger .icon { width: 22px; height: 22px; }
+    .nav__mobile {
+      position: absolute; top: 64px; left: 0; right: 0;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px 24px;
+      box-shadow: 0 8px 32px rgba(13,15,30,0.08);
+      display: none;
+    }
+    .nav__mobile.open { display: block; }
+    .nav__mobile__links { list-style: none; margin-bottom: 16px; }
+    .nav__mobile__links li a {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+      font-size: 15px; font-weight: 500; color: var(--navy); transition: color 0.15s;
+    }
+    .nav__mobile__links li:last-child a { border-bottom: none; }
+    .nav__mobile__links li a:hover { color: var(--cyan); }
+    .nav__mobile__cta { width: 100%; justify-content: center; margin-top: 8px; }
+
+    /* Page Hero */
+    .page-hero {
+      background: var(--navy);
+      padding-top: 184px; padding-bottom: 100px;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(0,168,200,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .page-hero__tag {
+      background: rgba(0,168,200,0.2); color: var(--cyan);
+      border-radius: 999px; padding: 4px 14px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      display: inline-block; margin-bottom: 20px;
+    }
+    .h-xl {
+      font-family: var(--font-d); font-weight: 800;
+      font-size: clamp(40px, 5.5vw, 64px);
+      line-height: 1.08; letter-spacing: -0.03em; color: #fff;
+    }
+    .page-hero__sub { font-size: 18px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-top: 16px; }
+
+    /* Privacy Content */
+    .privacy-wrap { max-width: 760px; }
+    .privacy-wrap h2 {
+      font-family: var(--font-d); font-size: 20px; font-weight: 700;
+      color: var(--navy); margin: 48px 0 14px; letter-spacing: -0.01em;
+    }
+    .privacy-wrap h2:first-child { margin-top: 0; }
+    .privacy-wrap p { font-size: 15px; color: var(--body); line-height: 1.85; margin-bottom: 12px; }
+    .privacy-wrap ul { padding-left: 20px; margin-bottom: 12px; }
+    .privacy-wrap ul li { font-size: 15px; color: var(--body); line-height: 1.85; margin-bottom: 4px; }
+    .privacy-meta {
+      margin-top: 56px; padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px; color: var(--muted);
+    }
+    .privacy-divider { width: 48px; height: 3px; border-radius: 3px; margin-bottom: 48px; background: linear-gradient(90deg, var(--cyan), var(--orange)); }
+
+    /* Footer */
+    .footer { border-top: 1px solid var(--border); padding: 64px 0 32px; }
+    .footer__top { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; margin-bottom: 48px; }
+    .footer__logo { font-family: var(--font-d); font-size: 20px; font-weight: 700; color: var(--navy); display: block; margin-bottom: 10px; }
+    .footer__logo em { font-style: normal; color: var(--cyan); }
+    .footer__tagline { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .footer__address { font-size: 12px; color: var(--muted); line-height: 1.7; }
+    .footer__nav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .footer__nav-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); margin-bottom: 14px; display: block; }
+    .footer__nav-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer__nav-col ul li a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
+    .footer__nav-col ul li a:hover { color: var(--navy); }
+    .footer__bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+    .footer__copy { font-size: 13px; color: var(--muted); }
+
+    .fade-up {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+    }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .section { padding: 80px 0; }
+      .nav__links, .nav__cta { display: none; }
+      .nav__hamburger { display: flex; align-items: center; }
+      .page-hero { padding-top: 120px; padding-bottom: 64px; }
+      .footer__top { grid-template-columns: 1fr; gap: 40px; }
+      .footer__nav-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .footer__bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────────── -->
+  <nav class="nav" id="mainNav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">NORD<em>-X</em></a>
+      <ul class="nav__links">
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="services.html">サービス</a></li>
+        <li><a href="company.html">会社概要</a></li>
+        <li><a href="news.html">ニュース</a></li>
+        <li><a href="careers.html">採用情報</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary nav__cta">
+        お問い合わせ <i data-lucide="arrow-right" class="icon"></i>
+      </a>
+      <button class="nav__hamburger" id="navHamburger" aria-label="メニューを開く">
+        <i data-lucide="menu" class="icon"></i>
+      </button>
+    </div>
+    <div class="nav__mobile" id="navMobile">
+      <ul class="nav__mobile__links">
+        <li><a href="index.html">ホーム <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="services.html">サービス <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="company.html">会社概要 <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="news.html">ニュース <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="careers.html">採用情報 <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary nav__mobile__cta">
+        <i data-lucide="send" class="icon"></i> お問い合わせ
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── Page Hero ────────────────────────────────────────────── -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__tag">Privacy Policy</div>
+      <h1 class="h-xl">プライバシーポリシー</h1>
+      <p class="page-hero__sub">個人情報の取り扱いについて</p>
+    </div>
+  </section>
+
+  <!-- ── Privacy Content ──────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="privacy-wrap fade-up">
+        <div class="privacy-divider"></div>
+
+        <h2>1. 個人情報の取得</h2>
+        <p>株式会社NORD-X（以下「当社」）は、お問い合わせフォームを通じて以下の情報を取得する場合があります。</p>
+        <ul>
+          <li>お名前</li>
+          <li>会社名・学校名</li>
+          <li>メールアドレス</li>
+          <li>お問い合わせ内容</li>
+        </ul>
+
+        <h2>2. 利用目的</h2>
+        <p>取得した個人情報は、以下の目的のみに利用します。</p>
+        <ul>
+          <li>お問い合わせへの回答・連絡</li>
+          <li>サービスに関するご案内</li>
+          <li>採用選考に関する連絡</li>
+        </ul>
+
+        <h2>3. 第三者への提供</h2>
+        <p>当社は、法令に基づく場合を除き、お客様の事前の同意なく個人情報を第三者に提供しません。</p>
+        <p>なお、当社はお問い合わせフォームの処理にFormspree, Inc.のサービスを利用しており、送信された情報は同社のサーバーを経由して処理されます。詳細は<a href="https://formspree.io/legal/privacy-policy" style="color:var(--cyan);" target="_blank" rel="noopener">Formspreeのプライバシーポリシー</a>をご確認ください。</p>
+
+        <h2>4. 個人情報の管理</h2>
+        <p>当社は、個人情報の漏洩・滅失・毀損を防止するため、適切な安全管理措置を講じます。個人情報へのアクセスは必要最小限の担当者に限定します。</p>
+
+        <h2>5. 開示・訂正・削除のご要望</h2>
+        <p>ご自身の個人情報の開示・訂正・削除をご希望の場合は、下記の連絡先までお申し出ください。合理的な範囲で速やかに対応いたします。</p>
+
+        <h2>6. お問い合わせ先</h2>
+        <p>個人情報の取り扱いに関するお問い合わせは、以下にご連絡ください。</p>
+        <p>
+          株式会社NORD-X<br>
+          所在地：〒001-0024 北海道札幌市北区北24条西19丁目5-21<br>
+          メール：<a href="mailto:kori23172@gmail.com" style="color:var(--cyan);">kori23172@gmail.com</a>
+        </p>
+
+        <h2>7. プライバシーポリシーの変更</h2>
+        <p>本ポリシーは、法令の改正やサービス内容の変更に応じて予告なく変更する場合があります。変更後のポリシーは本ページに掲載した時点から効力を生じます。</p>
+
+        <div class="privacy-meta">
+          制定日：2026年1月21日
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">NORD<em>-X</em></a>
+          <p class="footer__tagline">データが、一番正直だ。</p>
+          <p class="footer__address">〒001-0024 北海道札幌市北区<br>北24条西19丁目5-21</p>
+        </div>
+        <div class="footer__nav-grid">
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">サービス</span>
+            <ul>
+              <li><a href="services.html">Dynamic Pricing Lite</a></li>
+              <li><a href="services.html">AI &amp; DX Consulting</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">会社</span>
+            <ul>
+              <li><a href="company.html">会社概要</a></li>
+              <li><a href="news.html">ニュース</a></li>
+              <li><a href="careers.html">採用情報</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">Contact</span>
+            <ul>
+              <li><a href="contact.html">お問い合わせ</a></li>
+              <li><a href="mailto:kori23172@gmail.com">kori23172@gmail.com</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">© 2026 株式会社NORD-X. All rights reserved.</span>
+        <a href="/privacy" style="font-size:13px;color:var(--muted);transition:color 0.15s;">プライバシーポリシー</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>
+    lucide.createIcons();
+
+    const hamburger = document.getElementById('navHamburger');
+    const mobileNav = document.getElementById('navMobile');
+    let menuOpen = false;
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menuOpen = !menuOpen;
+        mobileNav.classList.toggle('open', menuOpen);
+        const icon = hamburger.querySelector('i[data-lucide]');
+        if (icon) { icon.setAttribute('data-lucide', menuOpen ? 'x' : 'menu'); lucide.createIcons(); }
+      });
+      document.addEventListener('click', (e) => {
+        if (menuOpen && !mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
+          menuOpen = false; mobileNav.classList.remove('open');
+          const icon = hamburger.querySelector('i[data-lucide]');
+          if (icon) { icon.setAttribute('data-lucide', 'menu'); lucide.createIcons(); }
+        }
+      });
+    }
+
+    const fadeObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+  </script>
+</body>
+</html>

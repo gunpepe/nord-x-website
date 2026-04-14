@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>お問い合わせ — 株式会社NORD-X</title>
   <meta name="description" content="株式会社NORD-Xへのお問い合わせ。DPLiteのデモ依頼・AI導入のご相談・採用へのエントリーなど。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="株式会社NORD-X" />
+  <meta property="og:title" content="お問い合わせ — 株式会社NORD-X" />
+  <meta property="og:description" content="DPLiteのデモ依頼・AI導入のご相談・採用へのエントリーなど、お気軽にどうぞ。" />
+  <meta property="og:url" content="https://nord-x.netlify.app/contact" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="お問い合わせ — 株式会社NORD-X" />
+  <meta name="twitter:description" content="DPLiteのデモ依頼・AI導入のご相談・採用へのエントリーなど、お気軽にどうぞ。" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -299,7 +308,10 @@
           </p>
         </div>
 
-        <form class="form fade-up" action="mailto:kori23172@gmail.com" method="POST" enctype="text/plain">
+        <form class="form fade-up" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input type="hidden" name="_subject" value="【NORD-X】お問い合わせが届きました" />
+          <input type="hidden" name="_next" value="https://nord-x.netlify.app/contact" />
+          <input type="text" name="_gotcha" style="display:none" />
           <div class="form__row">
             <div class="form__group">
               <label class="form__label" for="name">お名前</label>
@@ -375,6 +387,7 @@
       </div>
       <div class="footer__bottom">
         <span class="footer__copy">© 2026 株式会社NORD-X. All rights reserved.</span>
+        <a href="/privacy" style="font-size:13px;color:var(--muted);transition:color 0.15s;">プライバシーポリシー</a>
       </div>
     </div>
   </footer>
