@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /preview.html
+Disallow: /productivity-app/
+
+Sitemap: https://nord-x.netlify.app/sitemap.xml
