@@ -314,17 +314,23 @@
           <input type="text" name="_gotcha" style="display:none" />
           <div class="form__row">
             <div class="form__group">
-              <label class="form__label" for="name">お名前</label>
-              <input class="form__input" id="name" name="name" type="text" placeholder="山田 太郎" required />
+              <label class="form__label" for="last-name">姓</label>
+              <input class="form__input" id="last-name" name="last_name" type="text" placeholder="山田" required />
             </div>
+            <div class="form__group">
+              <label class="form__label" for="first-name">名</label>
+              <input class="form__input" id="first-name" name="first_name" type="text" placeholder="太郎" required />
+            </div>
+          </div>
+          <div class="form__row">
             <div class="form__group">
               <label class="form__label" for="org">会社名 / 学校名</label>
               <input class="form__input" id="org" name="org" type="text" placeholder="〇〇株式会社" />
             </div>
-          </div>
-          <div class="form__group">
-            <label class="form__label" for="email">メールアドレス</label>
-            <input class="form__input" id="email" name="email" type="email" placeholder="example@email.com" required />
+            <div class="form__group">
+              <label class="form__label" for="email">メールアドレス</label>
+              <input class="form__input" id="email" name="email" type="email" placeholder="example@email.com" required />
+            </div>
           </div>
           <div class="form__group">
             <label class="form__label" for="category">お問い合わせ種別</label>
