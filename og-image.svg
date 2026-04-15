@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0D0F1E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#131629;stop-opacity:1" />
+    </linearGradient>
+    <!-- Cyan glow for accent line -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <!-- Subtle grid pattern -->
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#1a1f3a" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)" />
+
+  <!-- Grid overlay -->
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.5" />
+
+  <!-- Left cyan accent bar -->
+  <rect x="0" y="0" width="6" height="630" fill="#00A8C8" />
+
+  <!-- Cyan accent line (horizontal) -->
+  <line x1="80" y1="420" x2="540" y2="420" stroke="#00A8C8" stroke-width="2" opacity="0.6" />
+
+  <!-- Decorative corner bracket top-left -->
+  <path d="M 80 160 L 80 120 L 120 120" fill="none" stroke="#00A8C8" stroke-width="2" opacity="0.8" />
+
+  <!-- Right side decorative element: data visualization bars -->
+  <g transform="translate(840, 200)">
+    <!-- Chart bars suggesting data/pricing -->
+    <rect x="0"   y="180" width="40" height="60"  fill="#00A8C8" opacity="0.3" rx="3"/>
+    <rect x="55"  y="140" width="40" height="100" fill="#00A8C8" opacity="0.5" rx="3"/>
+    <rect x="110" y="80"  width="40" height="160" fill="#00A8C8" opacity="0.7" rx="3"/>
+    <rect x="165" y="50"  width="40" height="190" fill="#00A8C8" opacity="0.9" rx="3"/>
+    <rect x="220" y="100" width="40" height="140" fill="#F55A1E" opacity="0.85" rx="3"/>
+    <rect x="275" y="60"  width="40" height="180" fill="#00A8C8" opacity="0.6" rx="3"/>
+
+    <!-- Trend line -->
+    <polyline points="20,175 75,135 130,75 185,45 240,95 295,55"
+              fill="none" stroke="#F55A1E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" filter="url(#glow)"/>
+
+    <!-- Dots on trend line -->
+    <circle cx="20"  cy="175" r="4" fill="#F55A1E" opacity="0.9"/>
+    <circle cx="185" cy="45"  r="6" fill="#F55A1E" opacity="1"/>
+    <circle cx="295" cy="55"  r="4" fill="#F55A1E" opacity="0.9"/>
+  </g>
+
+  <!-- "DPLite" label on chart -->
+  <text x="1010" y="195" font-family="'Inter', Arial, sans-serif" font-size="14" font-weight="600"
+        fill="#00A8C8" letter-spacing="2" opacity="0.8">DPLite</text>
+
+  <!-- Company name: 株式会社NORD-X -->
+  <text x="80" y="260" font-family="'Syne', 'Arial Black', Arial, sans-serif"
+        font-size="30" font-weight="700" fill="#FFFFFF" opacity="0.75" letter-spacing="1">
+    株式会社
+  </text>
+  <text x="80" y="360" font-family="'Syne', 'Arial Black', Arial, sans-serif"
+        font-size="88" font-weight="800" fill="#FFFFFF" letter-spacing="-2">
+    NORD-X
+  </text>
+
+  <!-- Tagline -->
+  <text x="82" y="465" font-family="'Inter', 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif"
+        font-size="28" font-weight="500" fill="#00A8C8" letter-spacing="3">
+    データが、一番正直だ。
+  </text>
+
+  <!-- Bottom right: subtle URL -->
+  <text x="1120" y="600" font-family="'Inter', Arial, sans-serif" font-size="14"
+        fill="#FFFFFF" opacity="0.3" text-anchor="end" letter-spacing="1">
+    nord-x.netlify.app
+  </text>
+
+  <!-- Orange accent dot -->
+  <circle cx="62" cy="465" r="5" fill="#F55A1E" />
+</svg>
