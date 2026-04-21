@@ -4,17 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>サービス — 株式会社NORD-X</title>
-  <meta name="description" content="NORD-Xのサービス。宿泊業向けダイナミックプライシングツール「DPLite」と中小企業向けAI・DXコンサルティング。" />
+  <meta name="description" content="NORD-Xのサービス。宿泊業向けダイナミックプライシングツール「DP-Lite」と中小企業向けAI・DXコンサルティング。" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="株式会社NORD-X" />
   <meta property="og:title" content="サービス — 株式会社NORD-X" />
-  <meta property="og:description" content="宿泊業向けダイナミックプライシングツール「DPLite」と中小企業向けAI・DXコンサルティング。データと実装で、ビジネスを前進させる。" />
+  <meta property="og:description" content="宿泊業向けダイナミックプライシングツール「DP-Lite」と中小企業向けAI・DXコンサルティング。データと実装で、ビジネスを前進させる。" />
   <meta property="og:url" content="https://nord-x.netlify.app/services" />
+  <link rel="canonical" href="https://nord-x.netlify.app/services" />
   <meta property="og:image" content="https://nord-x.netlify.app/og-image.svg" />
   <meta name="twitter:image" content="https://nord-x.netlify.app/og-image.svg" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="サービス — 株式会社NORD-X" />
-  <meta name="twitter:description" content="宿泊業向けダイナミックプライシングツール「DPLite」と中小企業向けAI・DXコンサルティング。" />
+  <meta name="twitter:description" content="宿泊業向けダイナミックプライシングツール「DP-Lite」と中小企業向けAI・DXコンサルティング。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -33,9 +34,30 @@
     "@type": "WebPage",
     "name": "サービス — 株式会社NORD-X",
     "url": "https://nord-x.netlify.app/services",
-    "description": "宿泊業向けダイナミックプライシングツール「DPLite」と中小企業向けAI・DXコンサルティング。",
+    "description": "宿泊業向けダイナミックプライシングツール「DP-Lite」と中小企業向けAI・DXコンサルティング。",
     "isPartOf": {
       "@type": "WebSite",
+      "name": "株式会社NORD-X",
+      "url": "https://nord-x.netlify.app/"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "DP-Lite（Dynamic Pricing Lite）",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "description": "ホテル・旅館向けOTA価格管理ツール。競合価格リアルタイムグラフ表示とCSV一括料金更新でRevPAR向上を実現。",
+    "url": "https://nord-x.netlify.app/services",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "JPY",
+      "availability": "https://schema.org/InStock"
+    },
+    "provider": {
+      "@type": "Organization",
       "name": "株式会社NORD-X",
       "url": "https://nord-x.netlify.app/"
     }
@@ -227,7 +249,7 @@
     .feat-item__label { font-family: var(--font-d); font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
     .feat-item__text  { font-size: 13px; color: var(--muted); line-height: 1.65; }
 
-    /* DPLite widget (light) */
+    /* DP-Lite widget (light) */
     .featured-card__visual {
       background: var(--surface); padding: 40px 36px;
       display: flex; align-items: center; justify-content: center;
@@ -389,15 +411,15 @@
   <!-- ── Navigation ──────────────────────────────────────────── -->
   <nav class="nav" id="mainNav">
     <div class="nav__inner">
-      <a href="index.html" class="nav__logo">NORD<em>-X</em></a>
+      <a href="/" class="nav__logo">NORD<em>-X</em></a>
       <ul class="nav__links">
-        <li><a href="index.html">ホーム</a></li>
-        <li><a href="services.html" style="color: var(--navy); font-weight: 600;">サービス</a></li>
-        <li><a href="company.html">会社概要</a></li>
-        <li><a href="news.html">ニュース</a></li>
-        <li><a href="careers.html">採用情報</a></li>
+        <li><a href="/">ホーム</a></li>
+        <li><a href="/services" style="color: var(--navy); font-weight: 600;">サービス</a></li>
+        <li><a href="/company">会社概要</a></li>
+        <li><a href="/news">ニュース</a></li>
+        <li><a href="/careers">採用情報</a></li>
       </ul>
-      <a href="contact.html" class="btn btn-primary nav__cta">
+      <a href="/contact" class="btn btn-primary nav__cta">
         お問い合わせ <i data-lucide="arrow-right" class="icon"></i>
       </a>
       <button class="nav__hamburger" id="navHamburger" aria-label="メニューを開く">
@@ -406,13 +428,13 @@
     </div>
     <div class="nav__mobile" id="navMobile">
       <ul class="nav__mobile__links">
-        <li><a href="index.html">ホーム <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
-        <li><a href="services.html">サービス <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
-        <li><a href="company.html">会社概要 <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
-        <li><a href="news.html">ニュース <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
-        <li><a href="careers.html">採用情報 <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="/">ホーム <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="/services">サービス <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="/company">会社概要 <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="/news">ニュース <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="/careers">採用情報 <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
       </ul>
-      <a href="contact.html" class="btn btn-primary nav__mobile__cta">
+      <a href="/contact" class="btn btn-primary nav__mobile__cta">
         <i data-lucide="send" class="icon"></i> お問い合わせ
       </a>
     </div>
@@ -427,12 +449,12 @@
     </div>
   </section>
 
-  <!-- ── Business 01: DPLite ───────────────────────────────────── -->
+  <!-- ── Business 01: DP-Lite ───────────────────────────────────── -->
   <section class="section" id="dplite">
     <div class="container">
       <div class="section-header fade-up">
         <div class="tag tag--surface">Business 01</div>
-        <h2 class="h-lg">Dynamic Pricing Lite（DPLite）— ホテル・旅館向けOTA価格管理ツール</h2>
+        <h2 class="h-lg">Dynamic Pricing Lite（DP-Lite）— ホテル・旅館向けOTA価格管理ツール</h2>
         <p>宿泊業特化型の収益管理プラットフォーム。OTA価格最適化とRevPAR向上を、勘ではなくデータで実現する。</p>
         <div class="divider-line"></div>
       </div>
@@ -465,7 +487,7 @@
           </ul>
         </div>
 
-        <!-- DPLite Widget (light) -->
+        <!-- DP-Lite Widget (light) -->
         <div class="featured-card__visual">
           <div class="dp-widget">
             <div class="dp-widget__header">
@@ -563,12 +585,12 @@
     <div class="container">
       <div class="fade-up">
         <h2 class="cta-section__title">まずはお気軽にご相談ください</h2>
-        <p class="cta-section__sub">DPLiteのデモ依頼・AI導入のご相談など、どんなことでもお聞きします。</p>
+        <p class="cta-section__sub">DP-Liteのデモ依頼・AI導入のご相談など、どんなことでもお聞きします。</p>
         <div class="cta-section__actions">
-          <a href="contact.html" class="btn btn-primary">
+          <a href="/contact" class="btn btn-primary">
             <i data-lucide="send" class="icon"></i> お問い合わせ・相談する
           </a>
-          <a href="company.html" class="btn btn-outline">
+          <a href="/company" class="btn btn-outline">
             会社概要を見る <i data-lucide="arrow-right" class="icon"></i>
           </a>
         </div>
@@ -581,7 +603,7 @@
     <div class="container">
       <div class="footer__top">
         <div class="footer__brand">
-          <a href="index.html" class="footer__logo">NORD<em>-X</em></a>
+          <a href="/" class="footer__logo">NORD<em>-X</em></a>
           <p class="footer__tagline">データが、一番正直だ。</p>
           <p class="footer__address">〒001-0024 北海道札幌市北区<br>北24条西19丁目5-21</p>
         </div>
@@ -589,22 +611,22 @@
           <div class="footer__nav-col">
             <span class="footer__nav-label">サービス</span>
             <ul>
-              <li><a href="services.html">Dynamic Pricing Lite</a></li>
-              <li><a href="services.html">AI &amp; DX Consulting</a></li>
+              <li><a href="/services">Dynamic Pricing Lite</a></li>
+              <li><a href="/services">AI &amp; DX Consulting</a></li>
             </ul>
           </div>
           <div class="footer__nav-col">
             <span class="footer__nav-label">会社</span>
             <ul>
-              <li><a href="company.html">会社概要</a></li>
-              <li><a href="news.html">ニュース</a></li>
-              <li><a href="careers.html">採用情報</a></li>
+              <li><a href="/company">会社概要</a></li>
+              <li><a href="/news">ニュース</a></li>
+              <li><a href="/careers">採用情報</a></li>
             </ul>
           </div>
           <div class="footer__nav-col">
             <span class="footer__nav-label">Contact</span>
             <ul>
-              <li><a href="contact.html">お問い合わせ</a></li>
+              <li><a href="/contact">お問い合わせ</a></li>
               <li><a href="mailto:kori23172@gmail.com">kori23172@gmail.com</a></li>
             </ul>
           </div>
@@ -620,7 +642,7 @@
   <!-- ── Sticky CTA (mobile) ───────────────────────────────────── -->
   <div class="sticky-cta" id="stickyCta">
     <div class="sticky-cta__inner">
-      <a href="contact.html" class="btn btn-primary">
+      <a href="/contact" class="btn btn-primary">
         <i data-lucide="send" class="icon"></i> まずは相談する
       </a>
       <a href="mailto:kori23172@gmail.com" class="btn btn-outline">メール</a>
@@ -660,7 +682,7 @@
       });
     }
 
-    /* ── DPLite widget sparkline ────────────────────────────── */
+    /* ── DP-Lite widget sparkline ────────────────────────────── */
     const sparkObs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;

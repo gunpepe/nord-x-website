@@ -52,3 +52,97 @@
   from = "/contact"
   to   = "/contact.html"
   status = 200
+
+# ── 記事ページのクリーンURL ──────────────────────────────────────────
+[[redirects]]
+  from = "/articles/jalan-rakuten-ota-tips.html"
+  to   = "/articles/jalan-rakuten-ota-tips"
+  status = 301
+
+[[redirects]]
+  from = "/articles/hokkaido-ryokan-dx-ai.html"
+  to   = "/articles/hokkaido-ryokan-dx-ai"
+  status = 301
+
+[[redirects]]
+  from = "/articles/small-hotel-ai-dx-guide.html"
+  to   = "/articles/small-hotel-ai-dx-guide"
+  status = 301
+
+[[redirects]]
+  from = "/articles/ai-dx-consulting-launch.html"
+  to   = "/articles/ai-dx-consulting-launch"
+  status = 301
+
+[[redirects]]
+  from = "/articles/dp-lite-beta-release.html"
+  to   = "/articles/dp-lite-beta-release"
+  status = 301
+
+[[redirects]]
+  from = "/articles/nord-x-founding.html"
+  to   = "/articles/nord-x-founding"
+  status = 301
+
+[[redirects]]
+  from = "/articles/jalan-rakuten-ota-tips"
+  to   = "/articles/jalan-rakuten-ota-tips.html"
+  status = 200
+
+[[redirects]]
+  from = "/articles/hokkaido-ryokan-dx-ai"
+  to   = "/articles/hokkaido-ryokan-dx-ai.html"
+  status = 200
+
+[[redirects]]
+  from = "/articles/small-hotel-ai-dx-guide"
+  to   = "/articles/small-hotel-ai-dx-guide.html"
+  status = 200
+
+[[redirects]]
+  from = "/articles/ai-dx-consulting-launch"
+  to   = "/articles/ai-dx-consulting-launch.html"
+  status = 200
+
+[[redirects]]
+  from = "/articles/dp-lite-beta-release"
+  to   = "/articles/dp-lite-beta-release.html"
+  status = 200
+
+[[redirects]]
+  from = "/articles/nord-x-founding"
+  to   = "/articles/nord-x-founding.html"
+  status = 200
+
+# ── キャッシュヘッダー ────────────────────────────────────────────────
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/articles/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

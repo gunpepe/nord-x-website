@@ -103,7 +103,7 @@ Icon size: 20px default, 18px in compact contexts. Stroke width: 1.75.
 Color: inherit from parent text color. Never use emoji as icons in the UI.
 
 Key icons in use:
-- DPLite section: `bar-chart-2`, `plug`, `map-pin`, `users`
+- DP-Lite section: `bar-chart-2`, `plug`, `map-pin`, `users`
 - AI section: `cpu`, `zap`, `arrow-up-right`, `target`
 - Navigation: `menu`
 - CTAs: `arrow-right`
@@ -168,7 +168,7 @@ Three distinct card types — never use the same card style twice in the same se
 Mockups are HTML/CSS representations of the product UI — not screenshots.
 They exist to make text-heavy sections more visual.
 
-### DPLite Dashboard Mockup
+### DP-Lite Dashboard Mockup
 - Mini card with dark header bar (`#0D0F1E`)
 - Bar chart: 7 bars with varying heights, active bar in cyan
 - Price recommendation badge: orange background, white text

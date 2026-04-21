@@ -54,9 +54,9 @@
     <circle cx="295" cy="55"  r="4" fill="#F55A1E" opacity="0.9"/>
   </g>
 
-  <!-- "DPLite" label on chart -->
+  <!-- "DP-Lite" label on chart -->
   <text x="1010" y="195" font-family="'Inter', Arial, sans-serif" font-size="14" font-weight="600"
-        fill="#00A8C8" letter-spacing="2" opacity="0.8">DPLite</text>
+        fill="#00A8C8" letter-spacing="2" opacity="0.8">DP-Lite</text>
 
   <!-- Company name: 株式会社NORD-X -->
   <text x="80" y="260" font-family="'Syne', 'Arial Black', Arial, sans-serif"
