@@ -1,0 +1,27 @@
+# .html付きURLをクリーンURLへ301リダイレクト
+/services.html      /services       301
+/company.html       /company        301
+/news.html          /news           301
+/careers.html       /careers        301
+/contact.html       /contact        301
+
+/articles/jalan-rakuten-ota-tips.html   /articles/jalan-rakuten-ota-tips    301
+/articles/hokkaido-ryokan-dx-ai.html    /articles/hokkaido-ryokan-dx-ai     301
+/articles/small-hotel-ai-dx-guide.html  /articles/small-hotel-ai-dx-guide   301
+/articles/ai-dx-consulting-launch.html  /articles/ai-dx-consulting-launch   301
+/articles/dp-lite-beta-release.html     /articles/dp-lite-beta-release      301
+/articles/nord-x-founding.html          /articles/nord-x-founding           301
+
+# クリーンURLから実ファイルへのリライト
+/services   /services.html  200
+/company    /company.html   200
+/news       /news.html      200
+/careers    /careers.html   200
+/contact    /contact.html   200
+
+/articles/jalan-rakuten-ota-tips    /articles/jalan-rakuten-ota-tips.html   200
+/articles/hokkaido-ryokan-dx-ai     /articles/hokkaido-ryokan-dx-ai.html    200
+/articles/small-hotel-ai-dx-guide   /articles/small-hotel-ai-dx-guide.html  200
+/articles/ai-dx-consulting-launch   /articles/ai-dx-consulting-launch.html  200
+/articles/dp-lite-beta-release      /articles/dp-lite-beta-release.html     200
+/articles/nord-x-founding           /articles/nord-x-founding.html          200
