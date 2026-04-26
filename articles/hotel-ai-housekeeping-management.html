@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ホテル向けAI清掃管理ツール——客室回転率と顧客満足を同時に上げる方法 — 株式会社NORD-X</title>
+  <meta name="description" content="客室清掃のタイミングと品質管理はホテル運営の要です。AIを活用した清掃スケジュール最適化ツールで、チェックアウト後の回転率を高め、清掃品質のばらつきをなくす最新アプローチを紹介します。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="株式会社NORD-X" />
+  <meta property="og:title" content="ホテル向けAI清掃管理ツール——客室回転率と顧客満足を同時に上げる方法" />
+  <meta property="og:description" content="客室清掃のタイミングと品質管理はホテル運営の要です。AIを活用した清掃スケジュール最適化ツールで、チェックアウト後の回転率を高め、清掃品質のばらつきをなくす最新アプローチを紹介します。" />
+  <meta property="og:url" content="https://nord-x.netlify.app/articles/hotel-ai-housekeeping-management" />
+  <meta property="og:image" content="https://nord-x.netlify.app/og-image.svg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="ホテル向けAI清掃管理ツール——客室回転率と顧客満足を同時に上げる方法" />
+  <meta name="twitter:description" content="客室清掃のタイミングと品質管理はホテル運営の要です。AIを活用した清掃スケジュール最適化ツールで、チェックアウト後の回転率を高め、清掃品質のばらつきをなくす最新アプローチを紹介します。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FQ2DJN2WMC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FQ2DJN2WMC');
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white:        #FFFFFF;
+      --surface:      #F4F6FB;
+      --border:       #E4E8F2;
+      --navy:         #0D0F1E;
+      --body:         #2C3252;
+      --muted:        #7A849A;
+      --cyan:         #00A8C8;
+      --cyan-light:   #E6F7FB;
+      --orange:       #F55A1E;
+      --orange-light: #FFF0EB;
+      --shadow-card:  0 2px 16px rgba(13,15,30,0.07);
+      --shadow-hover: 0 8px 40px rgba(0,168,200,0.15);
+      --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+      --font-d:       'Syne', sans-serif;
+      --font-b:       'Inter', sans-serif;
+      --max-w:        1200px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--body);
+      font-family: var(--font-b);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+
+    /* ── Nav ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav__inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 40px;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav__logo { font-family: var(--font-d); font-size: 20px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
+    .nav__logo em { font-style: normal; color: var(--cyan); }
+    .nav__links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav__links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color 0.15s; }
+    .nav__links a:hover { color: var(--navy); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; border-radius: 999px;
+      font-family: var(--font-b); font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: all 0.18s var(--ease-out); text-decoration: none;
+    }
+    .btn-primary { background: var(--navy); color: #fff; }
+    .btn-primary:hover { background: var(--cyan); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,168,200,0.3); }
+    .nav__cta { padding: 9px 22px; font-size: 14px; }
+    .icon { width: 18px; height: 18px; display: inline-block; vertical-align: middle; }
+    .nav__hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--navy); padding: 6px; border-radius: 6px; }
+    .nav__mobile { display: none; background: var(--white); border-top: 1px solid var(--border); padding: 16px 20px; }
+    .nav__mobile.open { display: block; }
+    .nav__mobile__links { list-style: none; margin-bottom: 16px; }
+    .nav__mobile__links li a { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 15px; font-weight: 500; color: var(--navy); }
+    .nav__mobile__cta { width: 100%; justify-content: center; margin-top: 8px; }
+
+    /* ── Article Hero ── */
+    .article-hero {
+      background: var(--navy);
+      padding: 80px 0 60px;
+    }
+    .article-hero__breadcrumb {
+      font-size: 13px; color: rgba(255,255,255,0.5);
+      margin-bottom: 20px; display: flex; align-items: center; gap: 8px;
+    }
+    .article-hero__breadcrumb a { color: rgba(255,255,255,0.5); transition: color 0.15s; }
+    .article-hero__breadcrumb a:hover { color: var(--cyan); }
+    .article-hero__cat {
+      display: inline-block; padding: 4px 14px;
+      border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      margin-bottom: 20px;
+    }
+    .cat--report { background: var(--orange-light); color: var(--orange); }
+    .cat--press { background: var(--cyan-light); color: var(--cyan); }
+    .cat--product { background: #EEF0FF; color: #5865F2; }
+    .cat--notice { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+    .article-hero__title {
+      font-family: var(--font-d); font-weight: 800;
+      font-size: clamp(24px, 3.5vw, 40px);
+      line-height: 1.2; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 24px;
+    }
+    .article-hero__meta {
+      display: flex; align-items: center; gap: 16px;
+      font-size: 13px; color: rgba(255,255,255,0.5);
+    }
+
+    /* ── Article Body ── */
+    .article-body { padding: 72px 0 96px; }
+    .article-content { max-width: 800px; margin: 0 auto; }
+    .article-lead {
+      font-size: 17px; line-height: 1.85; color: var(--body);
+      border-left: 3px solid var(--cyan); padding-left: 20px;
+      margin-bottom: 48px;
+    }
+    .article-content h2 {
+      font-family: var(--font-d); font-size: 22px; font-weight: 700;
+      color: var(--navy); margin: 48px 0 16px;
+      padding-bottom: 10px; border-bottom: 2px solid var(--border);
+    }
+    .article-content h3 {
+      font-family: var(--font-d); font-size: 18px; font-weight: 700;
+      color: var(--navy); margin: 32px 0 12px;
+    }
+    .article-content p {
+      font-size: 15px; line-height: 1.9; color: var(--body);
+      margin-bottom: 20px;
+    }
+    .article-content ul {
+      list-style: none; margin: 16px 0 24px; padding: 0;
+    }
+    .article-content ul li {
+      font-size: 15px; line-height: 1.8; color: var(--body);
+      padding: 8px 0 8px 24px; position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-content ul li:last-child { border-bottom: none; }
+    .article-content ul li::before {
+      content: ''; position: absolute; left: 0; top: 18px;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--cyan);
+    }
+
+    /* ── Back Link ── */
+    .article-back {
+      max-width: 800px; margin: 48px auto 0;
+      padding-top: 32px; border-top: 1px solid var(--border);
+    }
+    .article-back a {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 600; color: var(--cyan);
+      transition: gap 0.15s;
+    }
+    .article-back a:hover { gap: 12px; }
+
+    /* ── Footer ── */
+    .footer { border-top: 1px solid var(--border); padding: 64px 0 32px; }
+    .footer__top { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; margin-bottom: 48px; }
+    .footer__logo { font-family: var(--font-d); font-size: 20px; font-weight: 700; color: var(--navy); display: block; margin-bottom: 10px; }
+    .footer__logo em { font-style: normal; color: var(--cyan); }
+    .footer__tagline { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .footer__address { font-size: 12px; color: var(--muted); line-height: 1.7; }
+    .footer__nav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .footer__nav-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); margin-bottom: 14px; display: block; }
+    .footer__nav-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer__nav-col ul li a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
+    .footer__nav-col ul li a:hover { color: var(--navy); }
+    .footer__bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+    .footer__copy { font-size: 13px; color: var(--muted); }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .nav__inner { padding: 0 20px; }
+      .nav__links, .nav__cta { display: none; }
+      .nav__hamburger { display: flex; align-items: center; }
+      .article-hero { padding: 60px 0 40px; }
+      .article-body { padding: 48px 0 64px; }
+      .footer__top { grid-template-columns: 1fr; gap: 40px; }
+      .footer__nav-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav" id="mainNav">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__logo">NORD<em>-X</em></a>
+      <ul class="nav__links">
+        <li><a href="../index.html">ホーム</a></li>
+        <li><a href="../services.html">サービス</a></li>
+        <li><a href="../company.html">会社概要</a></li>
+        <li><a href="../news.html" style="color: var(--navy); font-weight: 600;">ニュース</a></li>
+        <li><a href="../careers.html">採用情報</a></li>
+      </ul>
+      <a href="../contact.html" class="btn btn-primary nav__cta">
+        お問い合わせ <i data-lucide="arrow-right" class="icon"></i>
+      </a>
+      <button class="nav__hamburger" id="navHamburger" aria-label="メニューを開く">
+        <i data-lucide="menu" class="icon"></i>
+      </button>
+    </div>
+    <div class="nav__mobile" id="navMobile">
+      <ul class="nav__mobile__links">
+        <li><a href="../index.html">ホーム <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="../services.html">サービス <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="../company.html">会社概要 <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="../news.html">ニュース <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="../careers.html">採用情報 <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+      </ul>
+      <a href="../contact.html" class="btn btn-primary nav__mobile__cta">
+        <i data-lucide="send" class="icon"></i> お問い合わせ
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── Article Hero ── -->
+  <div class="article-hero">
+    <div class="container">
+      <div class="article-hero__breadcrumb">
+        <a href="../news.html">ニュース</a>
+        <span>/</span>
+        <span>コラム</span>
+      </div>
+      <span class="article-hero__cat cat--report">コラム</span>
+      <h1 class="article-hero__title">ホテル向けAI清掃管理ツール——客室回転率と顧客満足を同時に上げる方法</h1>
+      <div class="article-hero__meta">
+        <span>2026.04.26</span>
+        <span>株式会社NORD-X</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Article Body ── -->
+  <div class="article-body">
+    <div class="container">
+      <div class="article-content">
+        <p class="article-lead">客室清掃のタイミングと品質管理はホテル運営の要です。AIを活用した清掃スケジュール最適化ツールで、チェックアウト後の回転率を高め、清掃品質のばらつきをなくす最新アプローチを紹介します。</p>
+        <p>客室清掃は、ホテル経営において「見えにくいが収益を左右する」工程の代表格です。チェックアウト後の清掃完了が15分遅れるだけで、アーリーチェックインの受け入れ可否が変わり、稼働率にも直結します。さらに清掃品質のムラはレビュースコアに表れ、OTAの順位や次の予約獲得力にまで波及します。AIによる清掃管理ツールは、この「時間」と「品質」のふたつの課題を、データに基づいて同時に最適化する仕組みです。</p>
+
+<h2>従来の清掃オペレーションが抱える3つのボトルネック</h2>
+<p>多くのホテルでは、清掃ルートはベテランスタッフの経験則で組まれています。これは強みでもありますが、属人化のリスクをはらみます。代表的な課題は次の3つです。</p>
+<ul>
+  <li>チェックアウト時間がばらつくため、清掃の着手順を即興で変えざるを得ない</li>
+  <li>連泊と退泊の判定ミスでアメニティ補充や清掃深度の判断が遅れる</li>
+  <li>新人スタッフの仕上がりチェックがマネージャーの目視に依存し、フィードバックが翌日以降になる</li>
+</ul>
+<p>結果として、繁忙期になるほど現場のストレスが増し、品質も安定しません。</p>
+
+<h2>AI清掃管理ツールが変える4つのポイント</h2>
+
+<h3>1. チェックアウトデータと連動した動的ルーティング</h3>
+<p>PMSとAPI連携することで、実際のチェックアウト発生時刻をもとにAIが清掃順を再計算します。固定ルートではなく、退室済みフロアと予定到着時刻の優先度に応じて、ハウスキーパーのタブレットに次の部屋が自動でアサインされます。</p>
+
+<h3>2. 写真認識による品質チェックの自動化</h3>
+<p>清掃完了時にスタッフが客室写真を数枚撮影するだけで、AIがベッドメイク・タオル配置・ゴミ残りなどを自動判定します。マネージャーは異常検知された部屋だけを確認すればよく、巡回工数を大きく削減できます。</p>
+
+<h3>3. リネン・アメニティ需要の予測</h3>
+<p>過去の稼働実績と予約データから、翌日に必要なリネン枚数とアメニティ数をAIが予測します。発注精度が上がるため、欠品による緊急発送やデッドストックを抑えられます。</p>
+
+<h3>4. スタッフ配置の最適化</h3>
+<p>稼働予測に応じて、必要な清掃人員数を曜日・時間帯ごとにシミュレーションできます。シフト過剰によるコスト増と、人員不足による回転遅延の両方を防げます。</p>
+
+<h2>導入を成功させる3ステップ</h2>
+<p>AI清掃管理ツールは、いきなり全機能を導入する必要はありません。次の順で段階的に立ち上げるのが現実的です。</p>
+<ul>
+  <li>第1段階：PMSのチェックアウトデータをAIに連携し、ルーティングだけ自動化する</li>
+  <li>第2段階：写真ベースの品質チェックを試験運用し、判定精度をスタッフと合わせ込む</li>
+  <li>第3段階：稼働予測と連動して、リネン発注とシフトを自動化する</li>
+</ul>
+<p>多くの施設で、第1段階だけでも清掃回転時間が10〜15%短縮された事例があります。</p>
+
+<h2>料金戦略との連動で利益率はさらに伸びる</h2>
+<p>清掃の最適化は、価格戦略と組み合わせて初めて売上インパクトに変わります。NORD-Xが提供する<strong>DPLite（ダイナミックプライシングツール）</strong>は、競合価格と需要をリアルタイムに反映してOTA価格を最適化するため、AI清掃管理ツールで生まれた回転率の余力をそのまま客室単価の引き上げに転換できます。「早く回せる」「高く売れる」をひとつのデータ基盤で運用することが、これからの宿泊業の基本構造になります。</p>
+
+<h2>NORD-Xにご相談ください</h2>
+<p>「AI清掃管理ツールに興味はあるが、自社の規模や既存PMSで使えるかわからない」という段階でも構いません。NORD-Xでは、ホテル・旅館それぞれの運営フローに合わせた業務自動化の設計と、DPLiteによる収益最大化までを一気通貫でサポートしています。客室回転率と顧客満足の両立をデータで実現したい経営者の方は、ぜひお気軽にお問い合わせください。</p>
+
+      </div>
+      <div class="article-back">
+        <a href="../news.html">
+          <i data-lucide="arrow-left" class="icon"></i> ニュース一覧に戻る
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="../index.html" class="footer__logo">NORD<em>-X</em></a>
+          <p class="footer__tagline">データが、一番正直だ。</p>
+          <p class="footer__address">〒001-0024 北海道札幌市北区<br>北24条西19丁目5-21</p>
+        </div>
+        <div class="footer__nav-grid">
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">サービス</span>
+            <ul>
+              <li><a href="../services.html">Dynamic Pricing Lite</a></li>
+              <li><a href="../services.html">AI &amp; DX Consulting</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">会社</span>
+            <ul>
+              <li><a href="../company.html">会社概要</a></li>
+              <li><a href="../news.html">ニュース</a></li>
+              <li><a href="../careers.html">採用情報</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">Contact</span>
+            <ul>
+              <li><a href="../contact.html">お問い合わせ</a></li>
+              <li><a href="mailto:kori23172@gmail.com">kori23172@gmail.com</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">© 2026 株式会社NORD-X. All rights reserved.</span>
+        <a href="../privacy.html" style="font-size:13px;color:var(--muted);transition:color 0.15s;">プライバシーポリシー</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>
+    lucide.createIcons();
+    const hamburger = document.getElementById('navHamburger');
+    const mobileNav = document.getElementById('navMobile');
+    let menuOpen = false;
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menuOpen = !menuOpen;
+        mobileNav.classList.toggle('open', menuOpen);
+        const icon = hamburger.querySelector('i[data-lucide]');
+        if (icon) { icon.setAttribute('data-lucide', menuOpen ? 'x' : 'menu'); lucide.createIcons(); }
+      });
+      document.addEventListener('click', (e) => {
+        if (menuOpen && !mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
+          menuOpen = false;
+          mobileNav.classList.remove('open');
+          const icon = hamburger.querySelector('i[data-lucide]');
+          if (icon) { icon.setAttribute('data-lucide', 'menu'); lucide.createIcons(); }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
