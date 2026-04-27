@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ホテル・旅館の収益改善に欠かせないKPI管理——稼働率・ADR・RevPARの見方 — 株式会社NORD-X</title>
+  <meta name="description" content="ホテル経営で必ず押さえるべきKPIが「稼働率」「ADR（平均客室単価）」「RevPAR」の3指標です。それぞれの意味と計算方法、改善施策への活かし方をわかりやすく解説します。" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="株式会社NORD-X" />
+  <meta property="og:title" content="ホテル・旅館の収益改善に欠かせないKPI管理——稼働率・ADR・RevPARの見方" />
+  <meta property="og:description" content="ホテル経営で必ず押さえるべきKPIが「稼働率」「ADR（平均客室単価）」「RevPAR」の3指標です。それぞれの意味と計算方法、改善施策への活かし方をわかりやすく解説します。" />
+  <meta property="og:url" content="https://nord-x.netlify.app/articles/hotel-kpi-occupancy-adr-revpar" />
+  <meta property="og:image" content="https://nord-x.netlify.app/og-image.svg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="ホテル・旅館の収益改善に欠かせないKPI管理——稼働率・ADR・RevPARの見方" />
+  <meta name="twitter:description" content="ホテル経営で必ず押さえるべきKPIが「稼働率」「ADR（平均客室単価）」「RevPAR」の3指標です。それぞれの意味と計算方法、改善施策への活かし方をわかりやすく解説します。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FQ2DJN2WMC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FQ2DJN2WMC');
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white:        #FFFFFF;
+      --surface:      #F4F6FB;
+      --border:       #E4E8F2;
+      --navy:         #0D0F1E;
+      --body:         #2C3252;
+      --muted:        #7A849A;
+      --cyan:         #00A8C8;
+      --cyan-light:   #E6F7FB;
+      --orange:       #F55A1E;
+      --orange-light: #FFF0EB;
+      --shadow-card:  0 2px 16px rgba(13,15,30,0.07);
+      --shadow-hover: 0 8px 40px rgba(0,168,200,0.15);
+      --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+      --font-d:       'Syne', sans-serif;
+      --font-b:       'Inter', sans-serif;
+      --max-w:        1200px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--body);
+      font-family: var(--font-b);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+
+    /* ── Nav ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav__inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 40px;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav__logo { font-family: var(--font-d); font-size: 20px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
+    .nav__logo em { font-style: normal; color: var(--cyan); }
+    .nav__links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav__links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color 0.15s; }
+    .nav__links a:hover { color: var(--navy); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; border-radius: 999px;
+      font-family: var(--font-b); font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: all 0.18s var(--ease-out); text-decoration: none;
+    }
+    .btn-primary { background: var(--navy); color: #fff; }
+    .btn-primary:hover { background: var(--cyan); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,168,200,0.3); }
+    .nav__cta { padding: 9px 22px; font-size: 14px; }
+    .icon { width: 18px; height: 18px; display: inline-block; vertical-align: middle; }
+    .nav__hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--navy); padding: 6px; border-radius: 6px; }
+    .nav__mobile { display: none; background: var(--white); border-top: 1px solid var(--border); padding: 16px 20px; }
+    .nav__mobile.open { display: block; }
+    .nav__mobile__links { list-style: none; margin-bottom: 16px; }
+    .nav__mobile__links li a { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 15px; font-weight: 500; color: var(--navy); }
+    .nav__mobile__cta { width: 100%; justify-content: center; margin-top: 8px; }
+
+    /* ── Article Hero ── */
+    .article-hero {
+      background: var(--navy);
+      padding: 80px 0 60px;
+    }
+    .article-hero__breadcrumb {
+      font-size: 13px; color: rgba(255,255,255,0.5);
+      margin-bottom: 20px; display: flex; align-items: center; gap: 8px;
+    }
+    .article-hero__breadcrumb a { color: rgba(255,255,255,0.5); transition: color 0.15s; }
+    .article-hero__breadcrumb a:hover { color: var(--cyan); }
+    .article-hero__cat {
+      display: inline-block; padding: 4px 14px;
+      border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      margin-bottom: 20px;
+    }
+    .cat--report { background: var(--orange-light); color: var(--orange); }
+    .cat--press { background: var(--cyan-light); color: var(--cyan); }
+    .cat--product { background: #EEF0FF; color: #5865F2; }
+    .cat--notice { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+    .article-hero__title {
+      font-family: var(--font-d); font-weight: 800;
+      font-size: clamp(24px, 3.5vw, 40px);
+      line-height: 1.2; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 24px;
+    }
+    .article-hero__meta {
+      display: flex; align-items: center; gap: 16px;
+      font-size: 13px; color: rgba(255,255,255,0.5);
+    }
+
+    /* ── Article Body ── */
+    .article-body { padding: 72px 0 96px; }
+    .article-content { max-width: 800px; margin: 0 auto; }
+    .article-lead {
+      font-size: 17px; line-height: 1.85; color: var(--body);
+      border-left: 3px solid var(--cyan); padding-left: 20px;
+      margin-bottom: 48px;
+    }
+    .article-content h2 {
+      font-family: var(--font-d); font-size: 22px; font-weight: 700;
+      color: var(--navy); margin: 48px 0 16px;
+      padding-bottom: 10px; border-bottom: 2px solid var(--border);
+    }
+    .article-content h3 {
+      font-family: var(--font-d); font-size: 18px; font-weight: 700;
+      color: var(--navy); margin: 32px 0 12px;
+    }
+    .article-content p {
+      font-size: 15px; line-height: 1.9; color: var(--body);
+      margin-bottom: 20px;
+    }
+    .article-content ul {
+      list-style: none; margin: 16px 0 24px; padding: 0;
+    }
+    .article-content ul li {
+      font-size: 15px; line-height: 1.8; color: var(--body);
+      padding: 8px 0 8px 24px; position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-content ul li:last-child { border-bottom: none; }
+    .article-content ul li::before {
+      content: ''; position: absolute; left: 0; top: 18px;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--cyan);
+    }
+
+    /* ── Back Link ── */
+    .article-back {
+      max-width: 800px; margin: 48px auto 0;
+      padding-top: 32px; border-top: 1px solid var(--border);
+    }
+    .article-back a {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 600; color: var(--cyan);
+      transition: gap 0.15s;
+    }
+    .article-back a:hover { gap: 12px; }
+
+    /* ── Footer ── */
+    .footer { border-top: 1px solid var(--border); padding: 64px 0 32px; }
+    .footer__top { display: grid; grid-template-columns: 1fr 2fr; gap: 64px; margin-bottom: 48px; }
+    .footer__logo { font-family: var(--font-d); font-size: 20px; font-weight: 700; color: var(--navy); display: block; margin-bottom: 10px; }
+    .footer__logo em { font-style: normal; color: var(--cyan); }
+    .footer__tagline { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .footer__address { font-size: 12px; color: var(--muted); line-height: 1.7; }
+    .footer__nav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .footer__nav-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); margin-bottom: 14px; display: block; }
+    .footer__nav-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer__nav-col ul li a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
+    .footer__nav-col ul li a:hover { color: var(--navy); }
+    .footer__bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+    .footer__copy { font-size: 13px; color: var(--muted); }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .nav__inner { padding: 0 20px; }
+      .nav__links, .nav__cta { display: none; }
+      .nav__hamburger { display: flex; align-items: center; }
+      .article-hero { padding: 60px 0 40px; }
+      .article-body { padding: 48px 0 64px; }
+      .footer__top { grid-template-columns: 1fr; gap: 40px; }
+      .footer__nav-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav" id="mainNav">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__logo">NORD<em>-X</em></a>
+      <ul class="nav__links">
+        <li><a href="../index.html">ホーム</a></li>
+        <li><a href="../services.html">サービス</a></li>
+        <li><a href="../company.html">会社概要</a></li>
+        <li><a href="../news.html" style="color: var(--navy); font-weight: 600;">ニュース</a></li>
+        <li><a href="../careers.html">採用情報</a></li>
+      </ul>
+      <a href="../contact.html" class="btn btn-primary nav__cta">
+        お問い合わせ <i data-lucide="arrow-right" class="icon"></i>
+      </a>
+      <button class="nav__hamburger" id="navHamburger" aria-label="メニューを開く">
+        <i data-lucide="menu" class="icon"></i>
+      </button>
+    </div>
+    <div class="nav__mobile" id="navMobile">
+      <ul class="nav__mobile__links">
+        <li><a href="../index.html">ホーム <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="../services.html">サービス <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="../company.html">会社概要 <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="../news.html">ニュース <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+        <li><a href="../careers.html">採用情報 <i data-lucide="chevron-right" class="icon" style="width:14px;height:14px;"></i></a></li>
+      </ul>
+      <a href="../contact.html" class="btn btn-primary nav__mobile__cta">
+        <i data-lucide="send" class="icon"></i> お問い合わせ
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── Article Hero ── -->
+  <div class="article-hero">
+    <div class="container">
+      <div class="article-hero__breadcrumb">
+        <a href="../news.html">ニュース</a>
+        <span>/</span>
+        <span>コラム</span>
+      </div>
+      <span class="article-hero__cat cat--report">コラム</span>
+      <h1 class="article-hero__title">ホテル・旅館の収益改善に欠かせないKPI管理——稼働率・ADR・RevPARの見方</h1>
+      <div class="article-hero__meta">
+        <span>2026.04.27</span>
+        <span>株式会社NORD-X</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Article Body ── -->
+  <div class="article-body">
+    <div class="container">
+      <div class="article-content">
+        <p class="article-lead">ホテル経営で必ず押さえるべきKPIが「稼働率」「ADR（平均客室単価）」「RevPAR」の3指標です。それぞれの意味と計算方法、改善施策への活かし方をわかりやすく解説します。</p>
+        <p>ホテル・旅館の経営判断において、感覚や経験則だけに頼る時代は終わりました。客室稼働率、ADR、RevPARという3つのKPIを正しく理解し、日々の運営に活かすことが、収益改善の第一歩です。本記事では、それぞれの指標の意味から実務での使い方、そして改善のための具体的なアプローチまで整理します。</p>
+
+<h2>宿泊業の収益管理に欠かせない3つの基本KPI</h2>
+
+<p>ホテルや旅館の経営指標として最低限おさえておきたいのが、稼働率（OCC）、ADR（平均客室単価）、RevPARの3つです。これらは単独で見るのではなく、組み合わせて読み解くことで、自社の強み・弱みが浮かび上がります。</p>
+
+<h3>稼働率（OCC：Occupancy Rate）</h3>
+
+<p>稼働率は「販売可能な客室数のうち、何室が実際に販売されたか」を示す指標です。計算式は以下の通りです。</p>
+
+<ul>
+<li>稼働率（％）＝ 販売客室数 ÷ 販売可能客室数 × 100</li>
+</ul>
+
+<p>たとえば全50室のホテルで、ある日40室が稼働した場合、稼働率は80％となります。シンプルな指標ですが、稼働率だけを追いかけると「とにかく安く売って埋める」という思考に陥りやすい点に注意が必要です。</p>
+
+<h3>ADR（Average Daily Rate：平均客室単価）</h3>
+
+<p>ADRは販売した客室1室あたりの平均単価を示します。</p>
+
+<ul>
+<li>ADR（円）＝ 客室売上 ÷ 販売客室数</li>
+</ul>
+
+<p>稼働率が高くても、安売りばかりで単価が下がっていれば、利益は出ません。逆に単価を上げすぎて稼働が落ちても本末転倒です。ADRは「価格戦略が適切か」を測るうえで欠かせません。</p>
+
+<h3>RevPAR（Revenue Per Available Room：販売可能客室1室あたりの売上）</h3>
+
+<p>RevPARは、稼働率とADRを統合した最重要指標です。</p>
+
+<ul>
+<li>RevPAR（円）＝ 客室売上 ÷ 販売可能客室数</li>
+<li>RevPAR ＝ 稼働率 × ADR</li>
+</ul>
+
+<p>RevPARを見れば「埋める力」と「価格を取る力」の両方を一度に評価できます。月次・週次でRevPARを追うことで、施策の効果が一目でわかります。</p>
+
+<h2>3指標をどう読み解くか——よくあるパターン</h2>
+
+<p>同じRevPARでも、その内訳によって取るべき打ち手は大きく変わります。</p>
+
+<ul>
+<li>稼働率が高くADRが低い：価格戦略の見直し余地あり。繁忙日や週末の値上げ機会を逃している可能性</li>
+<li>ADRが高く稼働率が低い：価格に対して需要が追いついていない。閑散期の柔軟な値下げや販促強化を検討</li>
+<li>両方が中途半端：競合分析と需要予測の精度を上げる必要あり</li>
+</ul>
+
+<h2>KPI改善のための実践アプローチ</h2>
+
+<p>3指標を改善するには、競合のリアルタイムな価格動向と、自館の予約状況を突き合わせて、日々価格を最適化することが不可欠です。とはいえ、複数のOTAサイトを毎日チェックして手作業で価格を更新するのは現実的ではありません。</p>
+
+<p>NORD-Xが提供する<strong>DPLite（ダイナミックプライシングツール）</strong>は、競合価格をリアルタイムでグラフ表示し、CSV一括更新で複数OTAの料金を効率的にコントロールできます。稼働率・ADR・RevPARを同時に押し上げる価格戦略を、現場の負担を増やさずに実現できる点が特徴です。</p>
+
+<h3>運用のポイント</h3>
+
+<ul>
+<li>週次でKPIを振り返り、前年同週・前月同週と比較する</li>
+<li>セグメント別（プラン別・客室タイプ別・販売チャネル別）でも分解して見る</li>
+<li>需要予測と連動した価格設定で、機会損失と安売りを同時に減らす</li>
+</ul>
+
+<h2>データドリブン経営への第一歩を</h2>
+
+<p>「データが、一番正直だ。」——これはNORD-Xが大切にしている考え方です。稼働率・ADR・RevPARという基本KPIを正しく読み解き、価格戦略に反映する仕組みがあれば、現場の勘と経験はさらに大きな武器になります。DPLiteをはじめとするNORD-Xのソリューションについて詳しく知りたい方は、ぜひお気軽にお問い合わせください。御社の収益管理体制を、次のステージへと引き上げるお手伝いをいたします。</p>
+
+      </div>
+      <div class="article-back">
+        <a href="../news.html">
+          <i data-lucide="arrow-left" class="icon"></i> ニュース一覧に戻る
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="../index.html" class="footer__logo">NORD<em>-X</em></a>
+          <p class="footer__tagline">データが、一番正直だ。</p>
+          <p class="footer__address">〒001-0024 北海道札幌市北区<br>北24条西19丁目5-21</p>
+        </div>
+        <div class="footer__nav-grid">
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">サービス</span>
+            <ul>
+              <li><a href="../services.html">Dynamic Pricing Lite</a></li>
+              <li><a href="../services.html">AI &amp; DX Consulting</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">会社</span>
+            <ul>
+              <li><a href="../company.html">会社概要</a></li>
+              <li><a href="../news.html">ニュース</a></li>
+              <li><a href="../careers.html">採用情報</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <span class="footer__nav-label">Contact</span>
+            <ul>
+              <li><a href="../contact.html">お問い合わせ</a></li>
+              <li><a href="mailto:kori23172@gmail.com">kori23172@gmail.com</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__copy">© 2026 株式会社NORD-X. All rights reserved.</span>
+        <a href="../privacy.html" style="font-size:13px;color:var(--muted);transition:color 0.15s;">プライバシーポリシー</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>
+    lucide.createIcons();
+    const hamburger = document.getElementById('navHamburger');
+    const mobileNav = document.getElementById('navMobile');
+    let menuOpen = false;
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menuOpen = !menuOpen;
+        mobileNav.classList.toggle('open', menuOpen);
+        const icon = hamburger.querySelector('i[data-lucide]');
+        if (icon) { icon.setAttribute('data-lucide', menuOpen ? 'x' : 'menu'); lucide.createIcons(); }
+      });
+      document.addEventListener('click', (e) => {
+        if (menuOpen && !mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
+          menuOpen = false;
+          mobileNav.classList.remove('open');
+          const icon = hamburger.querySelector('i[data-lucide]');
+          if (icon) { icon.setAttribute('data-lucide', 'menu'); lucide.createIcons(); }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
